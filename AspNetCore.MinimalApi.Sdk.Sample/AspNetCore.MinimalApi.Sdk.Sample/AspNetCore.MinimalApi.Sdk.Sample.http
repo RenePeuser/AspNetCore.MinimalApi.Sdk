@@ -1,6 +1,0 @@
-@AspNetCore.MinimalApi.Sdk.Sample_HostAddress = http://localhost:5249
-
-GET {{AspNetCore.MinimalApi.Sdk.Sample_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
