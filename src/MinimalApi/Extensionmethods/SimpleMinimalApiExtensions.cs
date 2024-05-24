@@ -42,7 +42,8 @@ namespace MinimalApi.Extensionmethods
                                               .Build();
 
             // Setup base path for API versioning
-            var basePath = webApplication.MapGroup("api/v{apiVersion:apiVersion}").WithApiVersionSet(apiVersionSet);
+            var basePath = webApplication.MapGroup("api/v{apiVersion:apiVersion}")
+                                         .WithApiVersionSet(apiVersionSet);
 
             endpointRegistration(basePath);
 
