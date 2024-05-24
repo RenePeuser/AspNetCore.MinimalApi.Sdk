@@ -73,7 +73,7 @@ namespace MinimalApi.Extensionmethods
             var fileContent = EmbeddedFile.GetFileContentFrom(embeddedFile);
             return builder.WithSummary(fileContent);
         }
-        
+
         public static TBuilder WithDescriptionFromFile<TBuilder>(this TBuilder builder, string embeddedFile) where TBuilder : IEndpointConventionBuilder
         {
             var fileContent = EmbeddedFile.GetFileContentFrom(embeddedFile);

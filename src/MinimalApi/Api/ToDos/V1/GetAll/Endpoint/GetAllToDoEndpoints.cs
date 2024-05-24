@@ -25,5 +25,4 @@ namespace MinimalApi.Api.ToDos.V1.GetAll
                                     .MapToApiVersion(new ApiVersion(1.0));
         }
     }
-
 }

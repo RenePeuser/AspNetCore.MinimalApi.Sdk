@@ -19,7 +19,7 @@ namespace MinimalApi.Api.ToDos.V1
             //                                      .MapToApiVersion(1);
 
             var v1TodoGroup = endpointRouteBuilder;
-            
+
             v1TodoGroup.UseGetAll();
             v1TodoGroup.UseGetById();
         }

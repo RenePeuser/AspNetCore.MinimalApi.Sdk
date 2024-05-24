@@ -7,7 +7,7 @@ namespace MinimalApi.Api.ToDos.V1.GetById
     {
         internal static RouteHandlerBuilder MapGetById(this IEndpointRouteBuilder routeGroupBuilder)
         {
-            return routeGroupBuilder.MapGet("todos/{id}", (int id, [FromServices]GetToDoById getToDoById) =>
+            return routeGroupBuilder.MapGet("todos/{id}", (int id, [FromServices] GetToDoById getToDoById) =>
                                     {
                                         var result = getToDoById.Execute(id);
 
@@ -29,5 +29,4 @@ namespace MinimalApi.Api.ToDos.V1.GetById
                                     .MapToApiVersion(1);
         }
     }
-
 }

@@ -14,9 +14,9 @@ namespace MinimalApi.Api.ToDos.V2
             //var v2ToDoGroup = endpointRouteBuilder.MapGroup("todos")
             //                                      .WithTags("ToDo")
             //                                      .MapToApiVersion(2);
-            
+
             var v2ToDoGroup = endpointRouteBuilder;
-            
+
             v2ToDoGroup.UseGetAll();
         }
     }

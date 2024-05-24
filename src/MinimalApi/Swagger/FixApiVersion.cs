@@ -5,17 +5,13 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace MinimalApi.Swagger
 {
-    internal class FixApiVersionConfigureNameOption(IApiVersionDescriptionProvider apiVersionDescriptionProvider) : IConfigureNamedOptions<SwaggerGenOptions>
+    internal sealed class FixApiVersionConfigureNameOption(IApiVersionDescriptionProvider apiVersionDescriptionProvider) : IConfigureNamedOptions<SwaggerGenOptions>
     {
         public void Configure(SwaggerGenOptions options)
         {
             foreach (var apiVersionDescription in apiVersionDescriptionProvider.ApiVersionDescriptions)
             {
-                var openApiInfo = new OpenApiInfo
-                {
-                    Title = "Minimal API - Swagger Title",
-                    Version = apiVersionDescription.ApiVersion.ToString(),
-                };
+                var openApiInfo = new OpenApiInfo { Title = "Minimal API - Swagger Title", Version = apiVersionDescription.ApiVersion.ToString() };
 
                 options.SwaggerDoc(apiVersionDescription.GroupName, openApiInfo);
             }
