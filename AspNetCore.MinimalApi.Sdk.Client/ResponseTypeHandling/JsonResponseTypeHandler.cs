@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Extensions.Pack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+
 namespace AspNetCore.MinimalApi.Sdk.Client
 {
     public static class AddJsonResponseTypeHandlerExtension
@@ -20,7 +21,7 @@ namespace AspNetCore.MinimalApi.Sdk.Client
         {
             PropertyNameCaseInsensitive = true,
         };
-        
+
         public bool CanHandle<TResult>(HttpResponseMessage responseMessage)
         {
             return responseMessage.IsSuccessStatusCode &&
