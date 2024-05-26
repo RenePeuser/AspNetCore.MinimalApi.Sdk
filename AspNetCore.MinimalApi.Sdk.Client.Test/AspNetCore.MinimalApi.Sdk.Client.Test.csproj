@@ -17,7 +17,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AspNetCore.Simple.MsTest.Sdk" Version="3.0.1" />
+      <None Remove="Api\ToDos\V1\GetAll\Responses\GetAllToDosOkResponse.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Api\ToDos\V1\GetAll\Responses\GetAllToDosOkResponse.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AspNetCore.Simple.MsTest.Sdk" Version="3.0.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
         <PackageReference Include="MSTest.TestAdapter" Version="3.4.0" />
         <PackageReference Include="MSTest.TestFramework" Version="3.4.0" />

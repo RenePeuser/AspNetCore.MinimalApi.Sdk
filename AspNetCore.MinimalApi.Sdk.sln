@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.Client.Test", "AspNetCore.MinimalApi.Sdk.Client.Test\AspNetCore.MinimalApi.Sdk.Client.Test.csproj", "{161D9E94-52A6-48E6-9B13-90BAC0ED27F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApi.Test", "MinimalApi.Test\MinimalApi.Test.csproj", "{CC75D062-7CBF-486B-93D3-BACF489C0CFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalApi.Test", "MinimalApi.Test\MinimalApi.Test.csproj", "{CC75D062-7CBF-486B-93D3-BACF489C0CFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
