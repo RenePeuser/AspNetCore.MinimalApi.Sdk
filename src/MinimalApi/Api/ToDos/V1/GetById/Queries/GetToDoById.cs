@@ -14,8 +14,18 @@ namespace MinimalApi.Api.ToDos.V1.GetById
     {
         private Todo[] sampleTodos = new Todo[]
         {
-            new(1, "Walk the dog"), new(2, "Do the dishes", DateOnly.FromDateTime(DateTime.Now)), new(3, "Do the laundry", DateOnly.FromDateTime(DateTime.Now.AddDays(1))), new(4, "Clean the bathroom"),
-            new(5, "Clean the car", DateOnly.FromDateTime(DateTime.Now.AddDays(2)))
+            new Todo()
+            {
+                Notes = new Notes()
+                {
+                    Hint = "Cool stuff",
+                    Key = "CS"
+                },
+                DueBy = DateOnly.FromDateTime(DateTime.Now),
+                Id = 1,
+                IsComplete = true,
+                Title = "Walk with the dog"
+            }
         };
 
         internal Todo? Execute(int id)

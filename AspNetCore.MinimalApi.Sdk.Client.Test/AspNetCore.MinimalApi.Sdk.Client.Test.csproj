@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <!-- Common settings have to be removed when build is fixed and use correctly directory build props !  -->
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>latestmajor</LangVersion>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <Nullable>enable</Nullable>
+        <WarningsAsErrors>Nullable</WarningsAsErrors>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AspNetCore.Simple.MsTest.Sdk" Version="3.0.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+        <PackageReference Include="MSTest.TestAdapter" Version="3.4.0" />
+        <PackageReference Include="MSTest.TestFramework" Version="3.4.0" />
+        <PackageReference Include="coverlet.collector" Version="6.0.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="appsettings.test.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\src\MinimalApi\MinimalApi.csproj" />
+        <ProjectReference Include="..\AspNetCore.MinimalApi.Sdk.Client\AspNetCore.MinimalApi.Sdk.Client.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Api\ToDos\V1\GetById\" />
+        <Folder Include="Api\ToDos\V2\NewFolder\" />
+    </ItemGroup>
+
+</Project>

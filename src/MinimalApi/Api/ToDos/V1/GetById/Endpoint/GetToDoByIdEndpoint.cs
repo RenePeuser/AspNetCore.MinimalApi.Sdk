@@ -26,6 +26,7 @@ namespace MinimalApi.Api.ToDos.V1.GetById
                                     .WithTags("ToDo")
                                     .WithDescription("Test Description")
                                     .WithOpenApi()
+                                    .WithMetadata(new ObsoleteAttribute("This endpoint is obsolete. Use /new-endpoint instead."))
                                     .MapToApiVersion(1);
         }
     }

@@ -18,3 +18,6 @@ app.UseSimpleMinimalApiEnvironment(endpoint =>
 });
 
 app.Run();
+
+// important for api tests !
+public partial class Program { }

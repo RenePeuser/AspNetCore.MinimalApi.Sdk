@@ -12,7 +12,7 @@ namespace MinimalApi.Api.ToDos.V1.GetAll
                                     {
                                         return Results.Ok(getAllToDosQuery.Execute());
                                     }).WithSummary("Get all ToDos")
-                                    .Produces(200, typeof(Todo))
+                                    .Produces(200, typeof(IEnumerable<Todo>))
                                     .Produces(400, typeof(ProblemDetails))
                                     .Produces(500, typeof(ProblemDetails))
                                     // .WithName("getAllToDos")
