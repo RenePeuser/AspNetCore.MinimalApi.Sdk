@@ -14,7 +14,7 @@ namespace MinimalApi.Api.ToDos.V1.DeleteById
                                     .Produces(202)
                                     .Produces(400, typeof(ProblemDetails))
                                     .Produces(500, typeof(ProblemDetails))
-                                    // .WithName("DeleteToDoById")
+                                    .WithName("deleteToDoByIdV1")
                                     .WithSummary("Provide a specific ToDo by its Id")
                                     .WithTags("ToDo")
                                     .WithDescription("Test Description")

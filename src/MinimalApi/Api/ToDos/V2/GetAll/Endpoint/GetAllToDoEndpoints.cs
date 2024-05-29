@@ -13,7 +13,7 @@ namespace MinimalApi.Api.ToDos.V2.GetAll
                                     .Produces(200, typeof(Todo))
                                     .Produces(400, typeof(ProblemDetails))
                                     .Produces(500, typeof(ProblemDetails))
-                                    // .WithName("getAllToDos")
+                                    .WithName("getAllToDosV2")
                                     .WithSummary("Returns all available ToDos")
                                     .WithTags("ToDo")
                                     .WithDescription("Test Description")

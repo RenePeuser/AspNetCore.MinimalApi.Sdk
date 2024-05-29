@@ -15,7 +15,7 @@ namespace MinimalApi.Api.ToDos.V1.GetAll
                                     .Produces(200, typeof(IEnumerable<Todo>))
                                     .Produces(400, typeof(ProblemDetails))
                                     .Produces(500, typeof(ProblemDetails))
-                                    // .WithName("getAllToDos")
+                                    .WithName("getAllToDosV1")
                                     .WithSummary("Returns all available ToDos")
                                     .WithTags("ToDo")
                                     .WithDescriptionFromFile("V1.GetAll.Documentation.GetAllTodoDescription.txt")

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -32,6 +32,18 @@ namespace AspNetCore.MinimalApi.Sdk.Client.Api.ToDo.V1
         }
         
         
+        public Task<Todo> AddToDoAsync(Todo todo)
+        {
+            return _httpCallHandler.CallAsync<Todo>(HttpMethod.Post, $"api/v1.0/todos", todo, CancellationToken.None);
+        }
+
+        
+        public Task DeleteToDoByIdAsync(int id)
+        {
+            return _httpCallHandler.CallAsync(HttpMethod.Delete, $"api/v1.0/todos/{id}", null, CancellationToken.None);
+        }
+
+        
         public Task<IEnumerable<Todo>> GetAllToDosAsync()
         {
             return _httpCallHandler.CallAsync<IEnumerable<Todo>>(HttpMethod.Get, $"api/v1.0/todos", null, CancellationToken.None);
@@ -41,6 +53,12 @@ namespace AspNetCore.MinimalApi.Sdk.Client.Api.ToDo.V1
         public Task<Todo> GetToDoByIdAsync(int id)
         {
             return _httpCallHandler.CallAsync<Todo>(HttpMethod.Get, $"api/v1.0/todos/{id}", null, CancellationToken.None);
+        }
+
+        
+        public Task<Todo> UpdateToDoByIdAsync(int id, Todo todo)
+        {
+            return _httpCallHandler.CallAsync<Todo>(HttpMethod.Put, $"api/v1.0/todos/{id}", todo, CancellationToken.None);
         }
     }
 }
