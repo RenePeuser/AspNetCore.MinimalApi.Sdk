@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MinimalApi.Api.ToDos.V1.Add;
+using MinimalApi.Api.ToDos.V1.DeleteById;
 using MinimalApi.Api.ToDos.V1.GetAll;
 using MinimalApi.Api.ToDos.V1.GetById;
+using MinimalApi.Api.ToDos.V1.Update;
 
 namespace MinimalApi.Api.ToDos.V1
 {
@@ -10,6 +12,9 @@ namespace MinimalApi.Api.ToDos.V1
         {
             serviceCollection.AddGetAll();
             serviceCollection.AddGetById();
+            serviceCollection.AddAddNewToDo();
+            serviceCollection.AddUpdateToDo();
+            serviceCollection.AddDeleteById();
         }
 
         internal static void UseToDosV1(this IEndpointRouteBuilder endpointRouteBuilder)
@@ -22,6 +27,9 @@ namespace MinimalApi.Api.ToDos.V1
 
             v1TodoGroup.UseGetAll();
             v1TodoGroup.UseGetById();
+            v1TodoGroup.UseAdd();
+            v1TodoGroup.UseUpdate();
+            v1TodoGroup.UseDeleteById();
         }
     }
 }
