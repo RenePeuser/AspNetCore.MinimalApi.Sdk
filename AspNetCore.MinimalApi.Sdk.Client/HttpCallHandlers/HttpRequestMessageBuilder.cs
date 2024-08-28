@@ -1,8 +1,7 @@
-using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
+using System.Text.Json;
 using Extensions.Pack;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,15 +17,13 @@ namespace AspNetCore.MinimalApi.Sdk.Client
 
     internal class HttpRequestMessageBuilder
     {
-        internal HttpRequestMessage BuildFrom(HttpMethod method, string uri, object? payload, string payloadParameterName)
+        internal HttpRequestMessage BuildFrom(HttpMethod method,
+                                              string uri,
+                                              object? payload,
+                                              string payloadParameterName)
         {
             var content = payload.IsNotNull() ? GetContent() : null;
-            return new HttpRequestMessage(method, uri)
-            {
-                Version = HttpVersion.Version11,
-                VersionPolicy = HttpVersionPolicy.RequestVersionOrLower,
-                Content = content
-            };
+            return new HttpRequestMessage(method, uri) { Version = HttpVersion.Version11, VersionPolicy = HttpVersionPolicy.RequestVersionOrLower, Content = content };
 
             HttpContent GetContent()
             {
@@ -42,7 +39,7 @@ namespace AspNetCore.MinimalApi.Sdk.Client
                         return new StreamContent(streamContent);
                     default:
                         // Default any class or record converted to json string
-                        return new StringContent(System.Text.Json.JsonSerializer.Serialize(payload), Encoding.UTF8, MediaTypeNames.Application.Json);
+                        return new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, MediaTypeNames.Application.Json);
                 }
             }
         }

@@ -10,15 +10,11 @@
 
     internal sealed class GetAllToDosQuery
     {
-        private Todo[] sampleTodos = new Todo[]
+        private readonly Todo[] sampleTodos =
         {
-            new Todo()
+            new()
             {
-                Notes = new Notes()
-                {
-                    Hint = "Cool stuff",
-                    Key = "CS"
-                },
+                Notes = new Notes { Hint = "Cool stuff", Key = "CS" },
                 DueBy = DateOnly.FromDateTime(DateTime.Now),
                 Id = 1,
                 IsComplete = true,

@@ -10,7 +10,7 @@ namespace MinimalApi.Api.ToDos.V1.Update
             return routeGroupBuilder.MapPut("todos/{id}", (int id, Todo todo, [FromServices] UpdateToDo updateToDo) =>
                                     {
                                         return Results.Ok((object?)updateToDo.Execute(id, todo));
-                                    }).WithSummary("Get ToDo by Id")
+                                    }).WithSummary("Update ToDo by Id")
                                     .Produces(200, typeof(Todo))
                                     .Produces(400, typeof(ProblemDetails))
                                     .Produces(500, typeof(ProblemDetails))

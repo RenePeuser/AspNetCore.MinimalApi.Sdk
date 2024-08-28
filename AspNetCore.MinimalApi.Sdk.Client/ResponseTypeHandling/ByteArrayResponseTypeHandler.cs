@@ -1,6 +1,3 @@
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Extensions.Pack;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,7 +19,10 @@ namespace AspNetCore.MinimalApi.Sdk.Client
                    typeof(TResult) == typeof(byte[]);
         }
 
-        public async Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage, HttpMethod httpMethod, HttpClient httpClient, string url)
+        public async Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage,
+                                                        HttpMethod httpMethod,
+                                                        HttpClient httpClient,
+                                                        string url)
         {
             // Safety first this method can be called without CanHandle check !
             CanHandle<TResult>(responseMessage);

@@ -1,8 +1,4 @@
-using System;
-using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.Client
@@ -21,16 +17,24 @@ namespace AspNetCore.MinimalApi.Sdk.Client
 
     public interface IHttpCallHandler
     {
-        Task CallAsync(HttpMethod httpMethod, string url, object? payload, CancellationToken cancellationToken, [CallerArgumentExpression(nameof(payload))] string payloadParameterName = "");
+        Task CallAsync(HttpMethod httpMethod,
+                       string url,
+                       object? payload,
+                       CancellationToken cancellationToken,
+                       [CallerArgumentExpression(nameof(payload))] string payloadParameterName = "");
 
-        Task<TResult> CallAsync<TResult>(HttpMethod httpMethod, string url, object? payload, CancellationToken cancellationToken, [CallerArgumentExpression(nameof(payload))] string payloadParameterName = "");
+        Task<TResult> CallAsync<TResult>(HttpMethod httpMethod,
+                                         string url,
+                                         object? payload,
+                                         CancellationToken cancellationToken,
+                                         [CallerArgumentExpression(nameof(payload))] string payloadParameterName = "");
     }
 
     internal class HttpCallHandler : IHttpCallHandler
     {
         private readonly HttpClient _httpClient;
-        private readonly ResponseTypeHandleStrategy _responseHandleStrategy;
         private readonly HttpRequestMessageBuilder _httpRequestMessageBuilder;
+        private readonly ResponseTypeHandleStrategy _responseHandleStrategy;
 
         public HttpCallHandler(HttpClient httpClient,
                                ResponseTypeHandleStrategy responseHandleStrategy,
@@ -42,7 +46,11 @@ namespace AspNetCore.MinimalApi.Sdk.Client
         }
 
 
-        public async Task CallAsync(HttpMethod httpMethod, string url, object? payload, CancellationToken cancellationToken, [CallerArgumentExpression(nameof(payload))] string payloadParameterName = "")
+        public async Task CallAsync(HttpMethod httpMethod,
+                                    string url,
+                                    object? payload,
+                                    CancellationToken cancellationToken,
+                                    [CallerArgumentExpression(nameof(payload))] string payloadParameterName = "")
         {
             var message = _httpRequestMessageBuilder.BuildFrom(httpMethod, url, payload, payloadParameterName);
             var response = await _httpClient.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -56,14 +64,17 @@ namespace AspNetCore.MinimalApi.Sdk.Client
             var absoluteUrl = $"{_httpClient.BaseAddress}{url}";
 
             throw new ClientProblemDetailsException("Client call to endpoint was not successful",
-                                                    $"The http call: {httpMethod.Method} {url} was not successful",
-                                                    ("HttpMethod", httpMethod.Method),
-                                                    ("Url", absoluteUrl),
-                                                    ("Error", content));
-
+                $"The http call: {httpMethod.Method} {url} was not successful",
+                ("HttpMethod", httpMethod.Method),
+                ("Url", absoluteUrl),
+                ("Error", content));
         }
 
-        public async Task<TResult> CallAsync<TResult>(HttpMethod httpMethod, string url, object? payload, CancellationToken cancellationToken, [CallerArgumentExpression(nameof(payload))] string payloadParameterName = "")
+        public async Task<TResult> CallAsync<TResult>(HttpMethod httpMethod,
+                                                      string url,
+                                                      object? payload,
+                                                      CancellationToken cancellationToken,
+                                                      [CallerArgumentExpression(nameof(payload))] string payloadParameterName = "")
         {
             var message = _httpRequestMessageBuilder.BuildFrom(httpMethod, url, payload, payloadParameterName);
             var response = await _httpClient.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -72,7 +83,10 @@ namespace AspNetCore.MinimalApi.Sdk.Client
         }
 
 
-        public async Task CallAsync(Func<HttpClient, string, string, Task<HttpResponseMessage>> httpFunction, HttpMethod httpMethod, string url, string paylod)
+        public async Task CallAsync(Func<HttpClient, string, string, Task<HttpResponseMessage>> httpFunction,
+                                    HttpMethod httpMethod,
+                                    string url,
+                                    string paylod)
         {
             var response = await httpFunction(_httpClient, url, paylod);
             if (response.IsSuccessStatusCode)
@@ -83,13 +97,16 @@ namespace AspNetCore.MinimalApi.Sdk.Client
             var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var absoluteUrl = $"{_httpClient.BaseAddress}{url}";
             throw new ClientProblemDetailsException("Client call to endpoint was not successfull",
-                                                    $"The http call: {httpMethod.Method} {url} was not successful",
-                                                    ("HttpMethod", httpMethod.Method),
-                                                    ("Url", absoluteUrl),
-                                                    ("Error", content));
+                $"The http call: {httpMethod.Method} {url} was not successful",
+                ("HttpMethod", httpMethod.Method),
+                ("Url", absoluteUrl),
+                ("Error", content));
         }
 
-        public async Task<TResult> CallAsync<TResult>(Func<HttpClient, string, string, Task<HttpResponseMessage>> httpFunction, HttpMethod httpMethod, string url, string paylod)
+        public async Task<TResult> CallAsync<TResult>(Func<HttpClient, string, string, Task<HttpResponseMessage>> httpFunction,
+                                                      HttpMethod httpMethod,
+                                                      string url,
+                                                      string paylod)
         {
             var response = await httpFunction(_httpClient, url, paylod);
             var result = await _responseHandleStrategy.HandleAsync<TResult>(response, httpMethod, _httpClient, url).ConfigureAwait(false);
