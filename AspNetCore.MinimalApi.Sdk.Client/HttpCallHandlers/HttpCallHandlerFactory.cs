@@ -1,4 +1,3 @@
-using System.Net.Http;
 using Extensions.Pack;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,8 +16,8 @@ namespace AspNetCore.MinimalApi.Sdk.Client
 
     internal class HttpCallHandlerFactory
     {
-        private readonly ResponseTypeHandleStrategy _responseTypeHandleStrategy;
         private readonly HttpRequestMessageBuilder _httpRequestMessageBuilder;
+        private readonly ResponseTypeHandleStrategy _responseTypeHandleStrategy;
 
         public HttpCallHandlerFactory(ResponseTypeHandleStrategy responseTypeHandleStrategy,
                                       HttpRequestMessageBuilder httpRequestMessageBuilder)

@@ -1,6 +1,4 @@
-using System.Net.Http;
 using System.Net.Mime;
-using System.Threading.Tasks;
 using Extensions.Pack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +15,10 @@ namespace AspNetCore.MinimalApi.Sdk.Client
 
     internal class FileStreamTypeHandler : ISpecificResponseTypeHandler
     {
-        public async Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage, HttpMethod httpMethod, HttpClient httpClient, string url)
+        public async Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage,
+                                                        HttpMethod httpMethod,
+                                                        HttpClient httpClient,
+                                                        string url)
         {
             // Safety first, check if we really can handle the result
             CanHandle<TResult>(responseMessage);

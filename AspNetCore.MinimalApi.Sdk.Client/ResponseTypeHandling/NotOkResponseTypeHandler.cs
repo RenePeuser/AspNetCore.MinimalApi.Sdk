@@ -1,5 +1,3 @@
-using System.Net.Http;
-using System.Threading.Tasks;
 using Extensions.Pack;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,7 +18,10 @@ namespace AspNetCore.MinimalApi.Sdk.Client
             return responseMessage.IsSuccessStatusCode.IsFalse();
         }
 
-        public async Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage, HttpMethod httpMethod, HttpClient httpClient, string url)
+        public async Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage,
+                                                        HttpMethod httpMethod,
+                                                        HttpClient httpClient,
+                                                        string url)
         {
             // Safety first this method can be called without CanHandle check !
             CanHandle<TResult>(responseMessage);
@@ -28,10 +29,10 @@ namespace AspNetCore.MinimalApi.Sdk.Client
             var content = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
             var absoluteUrl = $"{httpClient.BaseAddress}{url}";
             throw new ClientProblemDetailsException("Client call to endpoint was not successfull",
-                                                    $"The http call: {httpMethod.Method} {url} was not succesfull",
-                                                    ("HttpMethod", httpMethod.Method),
-                                                    ("Url", absoluteUrl),
-                                                    ("Error", content));
+                $"The http call: {httpMethod.Method} {url} was not succesfull",
+                ("HttpMethod", httpMethod.Method),
+                ("Url", absoluteUrl),
+                ("Error", content));
         }
     }
 }

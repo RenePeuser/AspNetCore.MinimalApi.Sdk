@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AspNetCore.Simple.MsTest.Sdk;
+﻿using AspNetCore.Simple.MsTest.Sdk;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AspNetCore.MinimalApi.Sdk.Client.Test.Api.ToDos.V1.GetAll
@@ -12,7 +7,6 @@ namespace AspNetCore.MinimalApi.Sdk.Client.Test.Api.ToDos.V1.GetAll
     [TestCategory("Todos - V2")]
     public class GetAllTest : ClientTestBase
     {
-
         [TestMethod]
         public void Simple_Object_Comparison()
         {
@@ -22,8 +16,6 @@ namespace AspNetCore.MinimalApi.Sdk.Client.Test.Api.ToDos.V1.GetAll
             Assert.That.ObjectsAreEqual(person1, person2, title: "Persons are not equal");
         }
 
-        internal record Person(string Name, string FamilyName, int Age);
-
         [TestMethod]
         public async Task Should_Return_All_Todos()
         {
@@ -31,5 +23,7 @@ namespace AspNetCore.MinimalApi.Sdk.Client.Test.Api.ToDos.V1.GetAll
 
             Assert.That.ObjectsAreEqual("Api.ToDos.V1.GetAll.Responses.GetAllToDosOkResponse.json", result);
         }
+
+        internal record Person(string Name, string FamilyName, int Age);
     }
 }

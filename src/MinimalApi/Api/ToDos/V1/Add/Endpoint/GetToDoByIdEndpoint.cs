@@ -9,7 +9,7 @@ namespace MinimalApi.Api.ToDos.V1.Add
         {
             return routeGroupBuilder.MapPost("todos", (Todo todo, [FromServices] AddNewToDo addNewToDo) =>
                                     {
-                                        return Results.Ok((object?)addNewToDo.Execute(todo));
+                                        return Results.Ok(addNewToDo.Execute(todo));
                                     }).WithSummary("Get ToDo by Id")
                                     .Produces(200, typeof(Todo))
                                     .Produces(400, typeof(ProblemDetails))

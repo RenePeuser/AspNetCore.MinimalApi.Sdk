@@ -1,19 +1,17 @@
 ﻿using AspNetCore.Simple.MsTest.Sdk;
 using Extensions.Pack;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Hosting;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AspNetCore.MinimalApi.Sdk.Client.Test
 {
-
     [TestClass]
     public abstract class ClientTestBase
     {
         private static ApiTestBase<Program>? _customWebApplicationFactory;
         private static HttpClient? _httpClient;
+
+        protected static AspNetCoreMinimalApiSdkClient AspNetCoreMinimalApiSdkClient { get; private set; } = null!;
 
         // In this sample we currently use assembly initialize, to save performance, but you can do it also different.
         [AssemblyInitialize]
@@ -38,8 +36,6 @@ namespace AspNetCore.MinimalApi.Sdk.Client.Test
 
             return Task.CompletedTask;
         }
-
-        protected static AspNetCoreMinimalApiSdkClient AspNetCoreMinimalApiSdkClient { get; private set; } = null!;
 
         [AssemblyCleanup]
         public static void AssemblyCleanup()

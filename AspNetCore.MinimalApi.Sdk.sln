@@ -7,9 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalApi", "src\MinimalAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalApi.Test", "MinimalApi.Test\MinimalApi.Test.csproj", "{CC75D062-7CBF-486B-93D3-BACF489C0CFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.Client", "AspNetCore.MinimalApi.Sdk.Client\AspNetCore.MinimalApi.Sdk.Client.csproj", "{14FB08BB-71CD-414D-B033-44B974274586}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.Client", "AspNetCore.MinimalApi.Sdk.Client\AspNetCore.MinimalApi.Sdk.Client.csproj", "{14FB08BB-71CD-414D-B033-44B974274586}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.Client.Test", "AspNetCore.MinimalApi.Sdk.Client.Test\AspNetCore.MinimalApi.Sdk.Client.Test.csproj", "{EC645650-5514-4189-B32E-F95580F8F66D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.Client.Test", "AspNetCore.MinimalApi.Sdk.Client.Test\AspNetCore.MinimalApi.Sdk.Client.Test.csproj", "{EC645650-5514-4189-B32E-F95580F8F66D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.CodeRules", "AspNetCore.MinimalApi.Sdk.CodeRules\AspNetCore.MinimalApi.Sdk.CodeRules.csproj", "{66E17076-8989-4A6E-A226-D001576592E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.CodeRules.Custom", "AspNetCore.MinimalApi.Sdk.CodeRules.Custom\AspNetCore.MinimalApi.Sdk.CodeRules.Custom.csproj", "{848AEF89-F887-4CB3-8F9E-9E7B3BB87DEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures", "AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures\AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures.csproj", "{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{EC645650-5514-4189-B32E-F95580F8F66D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC645650-5514-4189-B32E-F95580F8F66D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC645650-5514-4189-B32E-F95580F8F66D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66E17076-8989-4A6E-A226-D001576592E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66E17076-8989-4A6E-A226-D001576592E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66E17076-8989-4A6E-A226-D001576592E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66E17076-8989-4A6E-A226-D001576592E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{848AEF89-F887-4CB3-8F9E-9E7B3BB87DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848AEF89-F887-4CB3-8F9E-9E7B3BB87DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848AEF89-F887-4CB3-8F9E-9E7B3BB87DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848AEF89-F887-4CB3-8F9E-9E7B3BB87DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

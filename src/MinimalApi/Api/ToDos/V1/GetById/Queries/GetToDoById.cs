@@ -12,15 +12,11 @@ namespace MinimalApi.Api.ToDos.V1.GetById
 
     internal sealed class GetToDoById
     {
-        private Todo[] sampleTodos = new Todo[]
+        private readonly Todo[] sampleTodos =
         {
-            new Todo()
+            new()
             {
-                Notes = new Notes()
-                {
-                    Hint = "Cool stuff",
-                    Key = "CS"
-                },
+                Notes = new Notes { Hint = "Cool stuff", Key = "CS" },
                 DueBy = DateOnly.FromDateTime(DateTime.Now),
                 Id = 1,
                 IsComplete = true,
