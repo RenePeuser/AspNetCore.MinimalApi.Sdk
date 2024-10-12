@@ -1,17 +1,17 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Text;
 using System.Text.RegularExpressions;
 using Extensions.Pack;
 using Solution.Parser.CSharp;
 
-namespace AspNetCore.MinimalApi.Sdk.CodeRules.Tests.Basic
+namespace AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures.Basic.Classes._00003
 {
     [TestCategory("Coding-Rules Fixtures")]
     // [TestCategory("Basic")]
     [TestClass]
     public class RJIT_CR_BC_C_00003 : MsTestBase
     {
-        private IImmutableList<AnalyzedCodeResult> CodeRule()
+        private static ImmutableList<AnalyzedCodeResult> GetAnalyzedCodeResult()
         {
             var analyzedCode = (from @class in Classes
                                 where @class.SyntaxTree.DoesNotContain("partial Regex")
@@ -24,7 +24,7 @@ namespace AspNetCore.MinimalApi.Sdk.CodeRules.Tests.Basic
         [TestMethod]
         public async Task Should_SelfHealAsync()
         {
-            var codeRuleResult = CodeRule();
+            var codeRuleResult = GetAnalyzedCodeResult();
             foreach (var errors in codeRuleResult)
             {
                 var cSharpFiles = Solution.Projects.SelectMany(p => p.CSharpFileInfos).ToList();
