@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MinimalApi.Api.ToDos.V1.GetAll;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace MinimalApi.Api.ToDos.V1.Add
 {
