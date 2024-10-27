@@ -1,12 +1,14 @@
-<RuleSet Name="Rule set for generated client project" Description="Rule set for generated client projec" ToolsVersion="10.0">
-  <Localization ResourceAssembly="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.dll" ResourceBaseName="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.Localized">
-    <Name Resource="HelloWorldRules_Name" />
-    <Description Resource="HelloWorldRules_Description" />
-  </Localization>
-  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
-    <Rule Id="CS0618" Action="None" />
-  </Rules>
-  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
-    <Rule Id="CS0618" Action="None" />
-  </Rules>
+<RuleSet Name="Rule set for generated client project" Description="Rule set for generated client projec"
+         ToolsVersion="10.0">
+    <Localization ResourceAssembly="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.dll"
+                  ResourceBaseName="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.Localized">
+        <Name Resource="HelloWorldRules_Name"/>
+        <Description Resource="HelloWorldRules_Description"/>
+    </Localization>
+    <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+        <Rule Id="CS0618" Action="None"/>
+    </Rules>
+    <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
+        <Rule Id="CS0618" Action="None"/>
+    </Rules>
 </RuleSet>

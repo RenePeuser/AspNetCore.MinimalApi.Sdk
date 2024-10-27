@@ -1,54 +1,54 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<!-- Common settings have to be removed when build is fixed and use correctly directory build props !  -->
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<LangVersion>latestmajor</LangVersion>
-		<EnableNETAnalyzers>true</EnableNETAnalyzers>
-		<AnalysisLevel>latest</AnalysisLevel>
-		<Nullable>enable</Nullable>
-		<WarningsAsErrors>Nullable</WarningsAsErrors>
-		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-	</PropertyGroup>
+    <!-- Common settings have to be removed when build is fixed and use correctly directory build props !  -->
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>latestmajor</LangVersion>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <Nullable>enable</Nullable>
+        <WarningsAsErrors>Nullable</WarningsAsErrors>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    </PropertyGroup>
 
-	<PropertyGroup>
-		<Nullable>enable</Nullable>
-		<RunAnalyzers>false</RunAnalyzers>
-		<CodeAnalysisRuleSet>AspNetCore.MinimalApi.Sdk.Client.ruleset</CodeAnalysisRuleSet>
-	</PropertyGroup>
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <RunAnalyzers>false</RunAnalyzers>
+        <CodeAnalysisRuleSet>AspNetCore.MinimalApi.Sdk.Client.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
 
-	<PropertyGroup>
-		<OutputType>Library</OutputType>
-		<Authors>Rene Peuser, Philip Pregler</Authors>
-		<Description>A generated client library for the cloud service AspNetCore.MinimalApi.Sdk.Client</Description>
-		<PackageProjectUrl>https://eu-central-1.console.aws.amazon.com/codesuite/codecommit/repositories/pulse-core/browse?region=eu-central-1</PackageProjectUrl>
-		<RepositoryUrl>https://eu-central-1.console.aws.amazon.com/codesuite/codecommit/repositories/pulse-core/browse?region=eu-central-1</RepositoryUrl>
-		<RepositoryType>AWS CodeCommit</RepositoryType>
-		<PackageTags>Pulse;Core;AspNetCore.MinimalApi.Sdk.Client.Client;Client</PackageTags>
-		<PackageReleaseNotes>Generated client package</PackageReleaseNotes>
-		<Copyright>Copyright 2024 (c) Rene Peuser and Philip Pregler. All rights reserved.</Copyright>
-		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-		<PackageLicenseFile>License.txt</PackageLicenseFile>
-	</PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <Authors>Rene Peuser, Philip Pregler</Authors>
+        <Description>A generated client library for the cloud service AspNetCore.MinimalApi.Sdk.Client</Description>
+        <PackageProjectUrl>https://eu-central-1.console.aws.amazon.com/codesuite/codecommit/repositories/pulse-core/browse?region=eu-central-1</PackageProjectUrl>
+        <RepositoryUrl>https://eu-central-1.console.aws.amazon.com/codesuite/codecommit/repositories/pulse-core/browse?region=eu-central-1</RepositoryUrl>
+        <RepositoryType>AWS CodeCommit</RepositoryType>
+        <PackageTags>Pulse;Core;AspNetCore.MinimalApi.Sdk.Client.Client;Client</PackageTags>
+        <PackageReleaseNotes>Generated client package</PackageReleaseNotes>
+        <Copyright>Copyright 2024 (c) Rene Peuser and Philip Pregler. All rights reserved.</Copyright>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+        <PackageLicenseFile>License.txt</PackageLicenseFile>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Extensions.Pack" Version="5.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
-		<PackageReference Include="GitVersion.MsBuild" Version="5.12.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Extensions.Pack" Version="5.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0"/>
+        <PackageReference Include="GitVersion.MsBuild" Version="5.12.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 
-	<ItemGroup>
-		<None Update="License.txt">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
+    <ItemGroup>
+        <None Update="License.txt">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 
 </Project>

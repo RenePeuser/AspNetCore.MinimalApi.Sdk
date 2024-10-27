@@ -34,7 +34,9 @@ namespace AspNetCore.MinimalApi.Sdk.CodeRules.Api.Controllers
                             var versionMatch = GlobalRegex.MapToApiVersionRegex().Match(syntaxTreeStatement.SyntaxTree);
                             var version = versionMatch.Success ? versionMatch.Groups["version"].Value : "1";
 
-                            listStatements = listStatements.Add(new ValueTuple<Statement, ApiVersion>(syntaxTreeStatement, new ApiVersion(version.ToInt(), 0)));
+                            listStatements =
+                                listStatements.Add(new ValueTuple<Statement, ApiVersion>(syntaxTreeStatement,
+                                    new ApiVersion(version.ToInt(), 0)));
                         }
                     }
 
@@ -54,7 +56,10 @@ namespace AspNetCore.MinimalApi.Sdk.CodeRules.Api.Controllers
                                     var versionMatch = GlobalRegex.MapToApiVersionRegex().Match(methodStatement);
                                     var version = versionMatch.Success ? versionMatch.Groups["version"].Value : "1";
 
-                                    listStatements = listStatements.Add(new ValueTuple<Statement, ApiVersion>(new Statement(methodStatement, record.FilePath), new ApiVersion(version.ToInt(), 0)));
+                                    listStatements = listStatements.Add(
+                                        new ValueTuple<Statement, ApiVersion>(
+                                            new Statement(methodStatement, record.FilePath),
+                                            new ApiVersion(version.ToInt(), 0)));
                                 }
                             }
                         }
@@ -76,7 +81,10 @@ namespace AspNetCore.MinimalApi.Sdk.CodeRules.Api.Controllers
                                     var versionMatch = GlobalRegex.MapToApiVersionRegex().Match(methodStatement);
                                     var version = versionMatch.Success ? versionMatch.Groups["version"].Value : "1";
 
-                                    listStatements = listStatements.Add(new ValueTuple<Statement, ApiVersion>(new Statement(methodStatement, @class.FilePath), new ApiVersion(version.ToInt(), 0)));
+                                    listStatements = listStatements.Add(
+                                        new ValueTuple<Statement, ApiVersion>(
+                                            new Statement(methodStatement, @class.FilePath),
+                                            new ApiVersion(version.ToInt(), 0)));
                                 }
                             }
                         }

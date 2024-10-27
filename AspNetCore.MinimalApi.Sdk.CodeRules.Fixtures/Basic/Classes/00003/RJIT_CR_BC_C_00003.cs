@@ -14,10 +14,11 @@ namespace AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures.Basic.Classes._00003
         private static ImmutableList<AnalyzedCodeResult> GetAnalyzedCodeResult()
         {
             var analyzedCode = (from @class in Classes
-                                where @class.SyntaxTree.DoesNotContain("partial Regex")
-                                from modifier in @class.Modifiers
-                                where modifier == Modifier.Partial
-                                select new AnalyzedCodeResult(@class.FullQualifiedName, @class.Name, @class.SyntaxTree)).ToImmutableList();
+                    where @class.SyntaxTree.DoesNotContain("partial Regex")
+                    from modifier in @class.Modifiers
+                    where modifier == Modifier.Partial
+                    select new AnalyzedCodeResult(@class.FullQualifiedName, @class.Name, @class.SyntaxTree))
+                .ToImmutableList();
             return analyzedCode;
         }
 
@@ -37,7 +38,7 @@ namespace AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures.Basic.Classes._00003
                         var replacement = errors.ErrorSyntaxTree.Replace("set;", "init;");
                         var modifiedContent = Regex.Replace(codeToAnalyze, pattern, replacement);
                         await File.WriteAllTextAsync(allSyntax.Value.FullName, modifiedContent, new UTF8Encoding())
-                                  .ConfigureAwait(false);
+                            .ConfigureAwait(false);
                     }
                 }
             }
