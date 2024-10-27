@@ -1,4 +1,4 @@
-using Extensions.Pack;
+﻿using Extensions.Pack;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.GetAllToDos
@@ -8,17 +8,22 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.GetAllToDos
         internal static void AddGetAllToDosHandler(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMyApiHttpClientFactory(configuration);
+            services.AddConsoleService();
+
             services.AddSingletonIfNotExists<GetAllToDosHandler>();
         }
     }
 
-    internal sealed class GetAllToDosHandler(MyApiHttpClientFactory myApiHttpClientFactory)
+    internal sealed class GetAllToDosHandler(MyApiHttpClientFactory myApiHttpClientFactory,
+                                             ConsoleService consoleService)
     {
-        public Task HandleAsync(GetAllToDosParameters parameters)
+        public async Task HandleAsync(GetAllToDosParameters parameters)
         {
             // 1. create client
             var httpCallHandler = myApiHttpClientFactory.CreateFrom(parameters.Token);
-            return httpCallHandler.CallAsync(HttpMethod.Get, $"api/v1.0/todos", null, CancellationToken.None);
+            var result = await httpCallHandler.CallAsync(HttpMethod.Get, $"api/v1.0/todos", null, CancellationToken.None).ConfigureAwait(false);
+
+            consoleService.WriteSuccess(result);
         }
     }
 }

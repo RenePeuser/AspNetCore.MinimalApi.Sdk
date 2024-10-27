@@ -1,4 +1,4 @@
-using System.Net;
+﻿using System.Net;
 using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
@@ -15,7 +15,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
 
-    internal sealed class HttpRequestMessageBuilder
+    public sealed class HttpRequestMessageBuilder
     {
         internal HttpRequestMessage BuildFrom(HttpMethod method, string uri, object? payload, string payloadParameterName)
         {

@@ -14,10 +14,10 @@ namespace AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures.Basic.Records._00003
         private static ImmutableList<AnalyzedCodeResult> GetAnalyzedCodeResult()
         {
             var analyzedCode = (from record in Records
-                    where record.SyntaxTree.DoesNotContain("partial Regex")
-                    from modifier in record.Modifiers
-                    where modifier == Modifier.Partial
-                    select new AnalyzedCodeResult(record.FullQualifiedName, record.Name, record.SyntaxTree))
+                                where record.SyntaxTree.DoesNotContain("partial Regex")
+                                from modifier in record.Modifiers
+                                where modifier == Modifier.Partial
+                                select new AnalyzedCodeResult(record.FullQualifiedName, record.Name, record.SyntaxTree))
                 .ToImmutableList();
             return analyzedCode;
         }

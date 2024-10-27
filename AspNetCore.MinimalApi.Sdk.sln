@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures", "AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures\AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures.csproj", "{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.DotNetTool", "AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj", "{679CD5A9-34C3-4310-842A-C8EA81524BE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.DotNetTool", "AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj", "{D9DF7DAD-8FA6-4E17-AC1E-31EF0A20FC55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{679CD5A9-34C3-4310-842A-C8EA81524BE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{679CD5A9-34C3-4310-842A-C8EA81524BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{679CD5A9-34C3-4310-842A-C8EA81524BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{679CD5A9-34C3-4310-842A-C8EA81524BE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9DF7DAD-8FA6-4E17-AC1E-31EF0A20FC55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9DF7DAD-8FA6-4E17-AC1E-31EF0A20FC55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9DF7DAD-8FA6-4E17-AC1E-31EF0A20FC55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9DF7DAD-8FA6-4E17-AC1E-31EF0A20FC55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

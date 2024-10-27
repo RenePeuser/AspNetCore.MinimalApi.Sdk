@@ -1,4 +1,7 @@
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
+using AspNetCore.MinimalApi.Sdk.Client.Api.ToDo;
+using AspNetCore.MinimalApi.Sdk.Client.Api.ToDo.V1;
+using AspNetCore.MinimalApi.Sdk.Client.Api.ToDo.V2;
 using Extensions.Pack;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -8,32 +11,51 @@ namespace AspNetCore.MinimalApi.Sdk.Client
 {
     public static class AddAspNetCoreMinimalApiSdkClientFactoryExtension
     {
-        public static void AddAspNetCoreMinimalApiSdkClientFactory(this IServiceCollection services,
-                                                                   IConfiguration configuration)
+        public static void AddAspNetCoreMinimalApiSdkClientFactory(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddHttpClient();
             services.AddAspNetCoreMinimalApiSdkClientSettings(configuration);
-            services.AddResponseTypeHandleStrategy();
+            services.AddHttpCallHandlerFactory();
 
-            services.AddSingletonIfNotExists<AspNetCoreMinimalApiSdkClientFactory>();
+            services.AddSingletonIfNotExists<IAspNetCoreMinimalApiSdkClientFactory, AspNetCoreMinimalApiSdkClientFactory>();
         }
     }
 
-    internal class AspNetCoreMinimalApiSdkClientFactory(IHttpClientFactory httpClientFactory,
-                                                        AspNetCoreMinimalApiSdkClientSettings aspNetCoreMinimalApiSdkClientSettings,
-                                                        HttpCallHandlerFactory httpCallHandlerFactory)
+    public interface IAspNetCoreMinimalApiSdkClientFactory
     {
-        private readonly string[] _allowedHeadersToCopy = 
-        { 
-            "User-Agent", 
-            "Authorization", 
-            "x-", 
-            "Referer" 
-        };
+        AspNetCoreMinimalApiSdkClient CreateFrom(HttpClient sourceClient);
+        AspNetCoreMinimalApiSdkClient CreateFrom(HttpRequest httpRequest);
+    }
 
-        public HttpCallHandler CreateFrom(HttpRequest httpRequest)
+    internal class AspNetCoreMinimalApiSdkClientFactory : IAspNetCoreMinimalApiSdkClientFactory
+    {
+        private readonly string[] _allowedHeadersToCopy = { "User-Agent", "Authorization", "x-", "Referer" };
+        private readonly AspNetCoreMinimalApiSdkClientSettings _AspNetCoreMinimalApiSdkClientSettings;
+        private readonly HttpCallHandlerFactory _httpCallHandlerFactory;
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public AspNetCoreMinimalApiSdkClientFactory(IHttpClientFactory httpClientFactory,
+                                                    AspNetCoreMinimalApiSdkClientSettings AspNetCoreMinimalApiSdkClientSettings,
+                                                    HttpCallHandlerFactory httpCallHandlerFactory)
         {
-            var httpClient = httpClientFactory.CreateClient();
+            _httpClientFactory = httpClientFactory;
+            _AspNetCoreMinimalApiSdkClientSettings = AspNetCoreMinimalApiSdkClientSettings;
+            _httpCallHandlerFactory = httpCallHandlerFactory;
+        }
+
+        public AspNetCoreMinimalApiSdkClient CreateFrom(HttpClient httpClient)
+        {
+            httpClient.BaseAddress = new Uri(_AspNetCoreMinimalApiSdkClientSettings.BaseAddress);
+            var httpClientHandler = _httpCallHandlerFactory.CreateFrom(httpClient);
+
+            var client = BuildClient(httpClientHandler);
+
+            return client;
+        }
+
+        public AspNetCoreMinimalApiSdkClient CreateFrom(HttpRequest httpRequest)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
             httpRequest.Headers.ForEach(headerEntry =>
             {
                 // Important not content and host header copy
@@ -43,34 +65,36 @@ namespace AspNetCore.MinimalApi.Sdk.Client
                 }
             });
 
-            httpClient.BaseAddress = new Uri(aspNetCoreMinimalApiSdkClientSettings.BaseAddress);
+            httpClient.BaseAddress = new Uri(_AspNetCoreMinimalApiSdkClientSettings.BaseAddress);
 
-            var httpClientHandler = httpCallHandlerFactory.CreateFrom(httpClient);
+            var httpClientHandler = _httpCallHandlerFactory.CreateFrom(httpClient);
 
-            return httpClientHandler;
+            var client = BuildClient(httpClientHandler);
+
+            return client;
         }
 
-        public HttpCallHandler CreateFrom(string schema, string token)
+        public AspNetCoreMinimalApiSdkClient CreateFrom(string token)
         {
-            return CreateFrom($"{schema} {token}");
-        }
-        
-        public HttpCallHandler CreateFrom(string token)
-        {
-            var httpClient = httpClientFactory.CreateClient();
-            httpClient.BaseAddress = new Uri(aspNetCoreMinimalApiSdkClientSettings.BaseAddress);
+            var httpClient = _httpClientFactory.CreateClient();
+            httpClient.BaseAddress = new Uri(_AspNetCoreMinimalApiSdkClientSettings.BaseAddress);
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            httpClient.DefaultRequestHeaders.Add("User-Agent", "DotNetToolName");
-            var httpClientHandler = httpCallHandlerFactory.CreateFrom(httpClient);
+            var httpClientHandler = _httpCallHandlerFactory.CreateFrom(httpClient);
 
-            return httpClientHandler;
+            var client = BuildClient(httpClientHandler);
+
+            return client;
+        }
+
+        private AspNetCoreMinimalApiSdkClient BuildClient(HttpCallHandler httpClientHandler)
+        {
+            return new AspNetCoreMinimalApiSdkClient(new ToDoFacade(new ToDoV1(httpClientHandler), new ToDoV2(httpClientHandler)));
         }
     }
 
     public static class AddAspNetCoreMinimalApiSdkClientSettingsExtension
     {
-        public static void AddAspNetCoreMinimalApiSdkClientSettings(this IServiceCollection services,
-            IConfiguration configuration)
+        public static void AddAspNetCoreMinimalApiSdkClientSettings(this IServiceCollection services, IConfiguration configuration)
         {
             if (configuration.TryGetSettings<AspNetCoreMinimalApiSdkClientSettings>(out var clientSettings).IsFalse())
             {
