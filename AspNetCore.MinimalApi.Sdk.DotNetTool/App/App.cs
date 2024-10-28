@@ -1,9 +1,8 @@
-using System.CommandLine;
+﻿using System.CommandLine;
 using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi;
 using Extensions.Pack;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
@@ -15,16 +14,20 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
             var rootCommand = serviceProvider.GetRequiredService<MyApiCommandBuilder>().Build();
             var errorHandler = serviceProvider.GetRequiredService<ErrorHandler>();
             var dotNetCliArgumentFixer = serviceProvider.GetRequiredService<MyApiArgumentFixer>();
+
             // Setup command line builder from microsoft cli sdk
             var commandLineBuilder = new CommandLineBuilder(rootCommand);
             commandLineBuilder.UseMiddleware(errorHandler.HandleErrorsAsync);
             commandLineBuilder.UseDefaults();
             var parser = commandLineBuilder.Build();
+
             // We automatically add a version command
             var option = parser.Configuration.RootCommand.Options.Single(o => o.Name == "version").As<Option?>();
             option?.AddAlias("-v");
+
             // Fix or update command parameter
             var fixedArgs = dotNetCliArgumentFixer.Fix(args);
+
             // Here the cli sdk of microsoft will be invoked and manage any command execution
             var result = await parser.InvokeAsync(fixedArgs).ConfigureAwait(false);
             return result;

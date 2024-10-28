@@ -1,7 +1,5 @@
-using Extensions.Pack;
-using Microsoft.Extensions.Configuration;
+﻿using Extensions.Pack;
 using Microsoft.Extensions.Configuration.Json;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
