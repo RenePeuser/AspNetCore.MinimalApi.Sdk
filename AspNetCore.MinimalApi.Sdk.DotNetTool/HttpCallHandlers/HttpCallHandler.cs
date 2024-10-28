@@ -1,22 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
-using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
-    internal static class AddHttpCallHandlerExtension
-    {
-        internal static void AddHttpCallHandler(this IServiceCollection services)
-        {
-            services.AddResponseTypeHandleStrategy();
-            services.AddHttpRequestMessageBuilder();
-            services.AddHttpCallHandlerFactory();
-            services.AddHttpClient();
-
-
-            services.AddSingletonIfNotExists<HttpCallHandler>();
-        }
-    }
-
     public sealed class HttpCallHandler
     {
         private readonly HttpClient _httpClient;
