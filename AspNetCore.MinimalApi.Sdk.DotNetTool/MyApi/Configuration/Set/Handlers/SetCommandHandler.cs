@@ -1,4 +1,5 @@
-﻿using Extensions.Pack;
+﻿using System.Text.Json;
+using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
 {
@@ -14,9 +15,14 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
     {
         public async Task HandleAsync(GetParameters setParameters)
         {
+            // 1. Format incoming JSON string
+            using var doc = JsonDocument.Parse(setParameters.Json);
+
+            var jsonIntendedFormatted = doc.ToJsonIntended();
+
             // 1. Check if an appsettings.json exists on file
             var appsettingsOnDisk = new FileInfo(Path.Combine(Environment.CurrentDirectory, "appsettings.json"));
-            await File.WriteAllTextAsync(appsettingsOnDisk.FullName, setParameters.Json).ConfigureAwait(false);
+            await File.WriteAllTextAsync(appsettingsOnDisk.FullName, jsonIntendedFormatted).ConfigureAwait(false);
 
             consoleService.WriteSuccess($"New appsettings successful written into: {appsettingsOnDisk.FullName}.");
         }
