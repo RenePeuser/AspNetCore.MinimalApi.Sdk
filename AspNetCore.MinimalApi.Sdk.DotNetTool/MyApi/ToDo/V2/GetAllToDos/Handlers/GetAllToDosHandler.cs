@@ -12,13 +12,15 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V2.GetAllToDos
         }
     }
 
-    internal sealed class GetAllToDosHandler(MyApiHttpClientFactory myApiHttpClientFactory)
+    internal sealed class GetAllToDosHandler(ConsoleService consoleService, MyApiHttpClientFactory myApiHttpClientFactory)
     {
-        public Task HandleAsync(GetAllToDosParameters parameters)
+        public async Task HandleAsync(GetAllToDosParameters parameters)
         {
             // 1. create client
             var httpCallHandler = myApiHttpClientFactory.CreateFrom(parameters.Token);
-            return httpCallHandler.CallAsync(HttpMethod.Get, $"api/v2.0/todos", null, CancellationToken.None);
+            // Get the response as string -> only OK responses are provided here, error will be handled as exception
+            var stringResponse = await httpCallHandler.CallAsync(HttpMethod.Get, $"api/v2.0/todos", null, CancellationToken.None).ConfigureAwait(false);
+            consoleService.WriteSuccess(stringResponse);
         }
     }
 }

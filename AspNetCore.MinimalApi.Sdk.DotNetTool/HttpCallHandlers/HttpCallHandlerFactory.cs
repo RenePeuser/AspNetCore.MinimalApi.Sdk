@@ -1,4 +1,5 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
@@ -8,13 +9,11 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         {
             services.AddResponseTypeHandleStrategy();
             services.AddHttpRequestMessageBuilder();
-
             services.AddSingletonIfNotExists<HttpCallHandlerFactory>();
         }
     }
 
-    public sealed class HttpCallHandlerFactory(ResponseTypeHandleStrategy responseTypeHandleStrategy,
-                                               HttpRequestMessageBuilder httpRequestMessageBuilder)
+    internal sealed class HttpCallHandlerFactory(ResponseTypeHandleStrategy responseTypeHandleStrategy, HttpRequestMessageBuilder httpRequestMessageBuilder)
     {
         internal HttpCallHandler CreateFrom(HttpClient client)
         {

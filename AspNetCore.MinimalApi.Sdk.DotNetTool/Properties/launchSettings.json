@@ -2,12 +2,11 @@
   "profiles": {
     "AspNetCore.MinimalApi.Sdk.DotNetTool": {
       "commandName": "Project",
-      "commandLineArgs": "myapi todo v1 addtodo \"{\\\"todo\\\": {\\\"id\\\": 0, \\\"title\\\": \\\"New todo\\\", \\\"notes\\\": {\\\"key\\\": \\\"Key-Note\\\", \\\"hint\\\": \\\"Hint of note\\\"}, \\\"dueBy\\\": \\\"2024-10-27\\\", \\\"isComplete\\\": true}}\"",
+      "commandLineArgs": "myapi todo v1 getalltodos",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:55029;http://localhost:55030"
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
@@ -12,9 +12,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
         }
     }
 
-    internal sealed class AddToDoHandler(MyApiHttpClientFactory myApiHttpClientFactory,
-                                         ConsoleService consoleService)
-
+    internal sealed class AddToDoHandler(ConsoleService consoleService, MyApiHttpClientFactory myApiHttpClientFactory)
     {
         public async Task HandleAsync(AddToDoParameters parameters)
         {
@@ -24,9 +22,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
             var callInfos = parameters.Json.FromJsonStringAs<Dictionary<string, object?>>();
             // 3. Setup all needed variables
             var todo = callInfos["todo"]; // Mandatory
-            var result = await httpCallHandler.CallAsync(HttpMethod.Post, $"api/v1.0/todos", todo, CancellationToken.None).ConfigureAwait(false);
-
-            consoleService.WriteSuccess(result);
+            // Get the response as string -> only OK responses are provided here, error will be handled as exception
+            var stringResponse = await httpCallHandler.CallAsync(HttpMethod.Post, $"api/v1.0/todos", todo, CancellationToken.None).ConfigureAwait(false);
+            consoleService.WriteSuccess(stringResponse);
         }
     }
 }

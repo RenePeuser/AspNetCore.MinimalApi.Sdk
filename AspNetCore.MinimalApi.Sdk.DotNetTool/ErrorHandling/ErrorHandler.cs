@@ -24,14 +24,12 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
             catch (Exception e)
             {
                 var ex = FindMostSuitableException(e);
-                if (ex is MyApiException)
+                if (ex is ProblemDetailsException problemDetailsException)
                 {
-                    consoleService.WriteError(ex.Message);
+                    consoleService.WriteError(problemDetailsException.ProblemDetails.ToJsonIntended());
                 }
                 else
                 {
-                    consoleService.WriteError("An unhandled Error occurred:");
-                    consoleService.WriteLine();
                     consoleService.WriteError(ex.ToString());
                 }
 
@@ -41,7 +39,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 
         private static Exception FindMostSuitableException(Exception exception)
         {
-            if (exception is MyApiException)
+            if (exception is ProblemDetailsException)
             {
                 return exception;
             }

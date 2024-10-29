@@ -1,4 +1,4 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.GetAllToDos
@@ -8,22 +8,19 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.GetAllToDos
         internal static void AddGetAllToDosHandler(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMyApiHttpClientFactory(configuration);
-            services.AddConsoleService();
-
             services.AddSingletonIfNotExists<GetAllToDosHandler>();
         }
     }
 
-    internal sealed class GetAllToDosHandler(MyApiHttpClientFactory myApiHttpClientFactory,
-                                             ConsoleService consoleService)
+    internal sealed class GetAllToDosHandler(ConsoleService consoleService, MyApiHttpClientFactory myApiHttpClientFactory)
     {
         public async Task HandleAsync(GetAllToDosParameters parameters)
         {
             // 1. create client
             var httpCallHandler = myApiHttpClientFactory.CreateFrom(parameters.Token);
-            var result = await httpCallHandler.CallAsync(HttpMethod.Get, $"api/v1.0/todos", null, CancellationToken.None).ConfigureAwait(false);
-
-            consoleService.WriteSuccess(result);
+            // Get the response as string -> only OK responses are provided here, error will be handled as exception
+            var stringResponse = await httpCallHandler.CallAsync(HttpMethod.Get, $"api/v1.0/todos", null, CancellationToken.None).ConfigureAwait(false);
+            consoleService.WriteSuccess(stringResponse);
         }
     }
 }

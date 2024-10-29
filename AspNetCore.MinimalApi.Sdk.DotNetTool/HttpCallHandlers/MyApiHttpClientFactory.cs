@@ -1,5 +1,8 @@
-﻿using System.Net.Http.Headers;
+using System.Net.Http.Headers;
 using Extensions.Pack;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
@@ -15,14 +18,11 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
             services.AddHttpClient();
             services.AddMyApiHttpClientSettings(configuration);
             services.AddHttpCallHandlerFactory();
-
             services.AddSingletonIfNotExists<MyApiHttpClientFactory>();
         }
     }
 
-    public sealed class MyApiHttpClientFactory(IHttpClientFactory httpClientFactory,
-                                               MyApiHttpClientSettings aspNetCoreMinimalApiSdkClientSettings,
-                                               HttpCallHandlerFactory httpCallHandlerFactory)
+    internal sealed class MyApiHttpClientFactory(IHttpClientFactory httpClientFactory, MyApiHttpClientSettings aspNetCoreMinimalApiSdkClientSettings, HttpCallHandlerFactory httpCallHandlerFactory)
     {
         private readonly string[] _allowedHeadersToCopy =
         {
@@ -31,7 +31,6 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
             "x-",
             "Referer"
         };
-
         public HttpCallHandler CreateFrom(HttpRequest httpRequest)
         {
             var httpClient = httpClientFactory.CreateClient();

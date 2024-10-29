@@ -1,4 +1,4 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 using Microsoft.Extensions.Configuration.Json;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
@@ -7,20 +7,41 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
     {
         internal App Build()
         {
+            // 1. Setup startup
             var startup = new Startup();
+
+            // 2. Setup service collection
             var services = new ServiceCollection();
+
+            // 3. Setup configuration builder
             var configurationBuilder = new ConfigurationBuilder();
+
+            // 3.1 We are using embedded appsettings cause of deployments of .net tool.
             var appsettingsAsStream = typeof(AppBuilder).Assembly.GetEmbeddedFileAsStream("appsettings.json");
             var jsonStreamConfigurationSource = new JsonStreamConfigurationSource
             {
                 Stream = appsettingsAsStream
             };
+
+            // 3.2 Add json stream configuration source
             configurationBuilder.Add(jsonStreamConfigurationSource);
+
+            // 3.3 Add environment variables. With this we can overwrite all used settings :)
             configurationBuilder.AddEnvironmentVariables();
+
+            // 3.4 Add user secrets. With this we can overwrite all used settings :)
             configurationBuilder.AddUserSecrets(typeof(AppBuilder).Assembly);
+
+            // 4. Build configuration
             var configuration = configurationBuilder.Build();
+
+            // 5. Call startup to configure and setup the .net tool
             startup.ConfigureServices(services, configuration);
+
+            // 6. Build service provider
             var buildServiceProvider = services.BuildServiceProvider();
+
+            // 7. Provide the ready to use app
             return new App(buildServiceProvider);
         }
     }

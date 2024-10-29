@@ -1,4 +1,4 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
@@ -20,7 +20,11 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         public async Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage, HttpMethod httpMethod, HttpClient httpClient, string url)
         {
             // Safety first this method can be called without CanHandle check !
-            CanHandle<TResult>(responseMessage);
+            if (CanHandle<TResult>(responseMessage).IsFalse())
+            {
+                throw new ProblemDetailsException("ByteArrayResponseTypeHandler was called without checking CanHandle.", $"The response type handler for type: {typeof(TResult).Name} is not supported", ("SupportedTypes", "byte[]"));
+            }
+
             var result = await responseMessage.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
             return (TResult)result.Cast<object>();
         }

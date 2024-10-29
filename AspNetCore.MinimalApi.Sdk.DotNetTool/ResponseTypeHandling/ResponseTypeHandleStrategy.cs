@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
@@ -15,17 +15,23 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
 
-    public interface ISpecificResponseTypeHandler
+    internal interface ISpecificResponseTypeHandler
     {
         bool CanHandle<TResult>(HttpResponseMessage responseMessage);
         Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage, HttpMethod httpMethod, HttpClient httpClient, string url);
     }
 
-    public sealed class ResponseTypeHandleStrategy(IEnumerable<ISpecificResponseTypeHandler> handlers)
+    internal sealed class ResponseTypeHandleStrategy
     {
+        private readonly IEnumerable<ISpecificResponseTypeHandler> _responseHandlers;
+        public ResponseTypeHandleStrategy(IEnumerable<ISpecificResponseTypeHandler> responseHandlers)
+        {
+            _responseHandlers = responseHandlers;
+        }
+
         public Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage, HttpMethod httpMethod, HttpClient httpClient, string url)
         {
-            var responseHandlers = handlers.Where(handler => handler.CanHandle<TResult>(responseMessage)).ToImmutableList();
+            var responseHandlers = _responseHandlers.Where(handler => handler.CanHandle<TResult>(responseMessage)).ToImmutableList();
             if (responseHandlers.IsEmpty())
             {
                 throw new ProblemDetailsException("No response handler was found to handle expected response", $"No response handler was found to handle expected response type: '{typeof(TResult).Name}'", ("Response type", typeof(TResult).Name));

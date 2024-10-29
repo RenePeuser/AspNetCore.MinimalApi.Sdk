@@ -11,19 +11,17 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V2.GetAllToDos
         {
             services.AddGetAllToDosHandler(configuration);
             services.AddGetAllToDosOptionsBuilder();
-            services.AddGetAllToDosArgumentBuilder();
             services.AddSingletonIfNotExists<IV2SubCommandBuilder, GetAllToDosCommandBuilder>();
         }
     }
 
-    internal sealed class GetAllToDosCommandBuilder(GetAllToDosHandler getAllToDosHandler, GetAllToDosOptionsBuilder optionsBuilder, GetAllToDosArgumentBuilder argumentBuilder) : IV2SubCommandBuilder
+    internal sealed class GetAllToDosCommandBuilder(GetAllToDosHandler getAllToDosHandler, GetAllToDosOptionsBuilder optionsBuilder) : IV2SubCommandBuilder
     {
         public Command Build()
         {
             var command = new Command("getalltodos", "Here comes the description for GetAllToDos");
             optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
-            command.AddArgument(argumentBuilder.Build());
-            command.Handler = CommandHandler.Create<string, string>((json, token) => getAllToDosHandler.HandleAsync(new GetAllToDosParameters(json, token)));
+            command.Handler = CommandHandler.Create<string>((token) => getAllToDosHandler.HandleAsync(new GetAllToDosParameters(token)));
             return command;
         }
     }

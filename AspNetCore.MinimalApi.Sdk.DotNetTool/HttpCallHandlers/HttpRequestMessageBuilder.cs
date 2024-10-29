@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
@@ -7,15 +7,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
-    public static class AddHttpRequestMessageBuilderExtension
+    internal static class AddHttpRequestMessageBuilderExtension
     {
-        public static void AddHttpRequestMessageBuilder(this IServiceCollection services)
+        internal static void AddHttpRequestMessageBuilder(this IServiceCollection services)
         {
             services.AddSingletonIfNotExists<HttpRequestMessageBuilder>();
         }
     }
 
-    public sealed class HttpRequestMessageBuilder
+    internal sealed class HttpRequestMessageBuilder
     {
         internal HttpRequestMessage BuildFrom(HttpMethod method, string uri, object? payload, string payloadParameterName)
         {
