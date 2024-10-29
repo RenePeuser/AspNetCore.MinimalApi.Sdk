@@ -1,4 +1,6 @@
 ﻿using MinimalApi.Api.ToDos;
+using MinimalApi.Api.ToDos.V1.DbContext;
+using MinimalApi.Api.ToDos.V1.GetAll;
 using MinimalApi.ErrorHandling;
 using MinimalApi.Extensionmethods;
 
@@ -20,6 +22,19 @@ app.UseSimpleMinimalApiEnvironment(endpoint =>
 });
 
 app.UseErrorHandling();
+
+app.Services.GetRequiredService<TodoRepository>().Add(new()
+{
+    Notes = new Notes
+    {
+        Hint = "Cool stuff",
+        Key = "CS"
+    },
+    DueBy = DateOnly.FromDateTime(DateTime.Now),
+    Id = 1,
+    IsComplete = true,
+    Title = "Walk with the dog"
+});
 
 app.Run();
 

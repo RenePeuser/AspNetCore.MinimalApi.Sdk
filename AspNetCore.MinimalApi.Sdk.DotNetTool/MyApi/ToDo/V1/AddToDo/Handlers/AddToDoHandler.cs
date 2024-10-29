@@ -11,7 +11,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
         }
     }
 
-    internal sealed class AddToDoHandler(ConsoleService consoleService, MyApiHttpClientFactory myApiHttpClientFactory)
+    internal sealed class AddToDoHandler(MyApiHttpClientFactory myApiHttpClientFactory)
     {
         internal async Task HandleAsync(AddToDoParameters parameters)
         {
@@ -26,8 +26,6 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
 
             // 4. Get the response as string -> only OK responses are provided here, error will be handled as exception
             var stringResponse = await httpCallHandler.CallAsync(HttpMethod.Post, $"api/v1.0/todos", todo, CancellationToken.None).ConfigureAwait(false);
-
-            consoleService.WriteSuccess(stringResponse);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MinimalApi.Api.ToDos.V1.DbContext
     // - delete a todo by id
     // - get a todo by id
     // - update a todo by id
-    internal class TodoRepository
+    internal sealed class TodoRepository
     {
         private readonly List<Todo> _todos = new List<Todo>();
 
