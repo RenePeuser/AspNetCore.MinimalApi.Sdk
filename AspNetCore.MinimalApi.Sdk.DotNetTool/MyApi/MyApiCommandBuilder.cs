@@ -1,6 +1,7 @@
-using System.CommandLine;
+﻿using System.CommandLine;
 using Extensions.Pack;
 using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo;
+using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi
 {
@@ -8,7 +9,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi
     {
         internal static void AddMyApiCommandBuilder(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddConfigurationCommandBuilder();
             services.AddToDoCommandBuilder(configuration);
+
             services.AddSingletonIfNotExists<MyApiCommandBuilder>();
         }
     }
