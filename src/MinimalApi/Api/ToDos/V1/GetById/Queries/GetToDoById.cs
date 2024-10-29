@@ -1,4 +1,5 @@
-﻿using MinimalApi.Api.ToDos.V1.GetAll;
+﻿using MinimalApi.Api.ToDos.V1.DbContext;
+using MinimalApi.Api.ToDos.V1.GetAll;
 
 namespace MinimalApi.Api.ToDos.V1.GetById
 {
@@ -10,24 +11,11 @@ namespace MinimalApi.Api.ToDos.V1.GetById
         }
     }
 
-    internal sealed class GetToDoById
+    internal sealed class GetToDoById(TodoRepository todoRepository)
     {
-        private readonly Todo[] sampleTodos =
+        internal Todo Execute(int id)
         {
-            new()
-            {
-                Notes = new Notes { Hint = "Cool stuff", Key = "CS" },
-                DueBy = DateOnly.FromDateTime(DateTime.Now),
-                Id = 1,
-                IsComplete = true,
-                Title = "Walk with the dog"
-            }
-        };
-
-        internal Todo? Execute(int id)
-        {
-            var result = sampleTodos.FirstOrDefault(t => t.Id == id);
-            return result;
+            return todoRepository.GetById(id);
         }
     }
 }

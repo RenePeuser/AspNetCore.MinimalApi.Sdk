@@ -1,4 +1,5 @@
-﻿using MinimalApi.Api.ToDos.V1.GetAll;
+﻿using MinimalApi.Api.ToDos.V1.DbContext;
+using MinimalApi.Api.ToDos.V1.GetAll;
 
 namespace MinimalApi.Api.ToDos.V1.Update
 {
@@ -10,11 +11,11 @@ namespace MinimalApi.Api.ToDos.V1.Update
         }
     }
 
-    internal sealed class UpdateToDo
+    internal sealed class UpdateToDo(TodoRepository todoRepository)
     {
-        internal Todo Execute(int _, Todo todo)
+        internal Todo Execute(int id, Todo todo)
         {
-            return todo;
+            return todoRepository.Update(id, todo);
         }
     }
 }

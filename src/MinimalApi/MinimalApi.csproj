@@ -8,20 +8,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="Api\ToDos\V1\GetAll\Documentation\GetAllTodoDescription.txt"/>
+        <None Remove="Api\ToDos\V1\GetAll\Documentation\GetAllTodoDescription.txt" />
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Api\ToDos\V1\GetAll\Documentation\GetAllTodoDescription.txt"/>
+        <EmbeddedResource Include="Api\ToDos\V1\GetAll\Documentation\GetAllTodoDescription.txt" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Asp.Versioning.Http" Version="8.1.0"/>
-        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0"/>
-        <PackageReference Include="AspNetCore.Simple.Sdk" Version="5.0.1"/>
-        <PackageReference Include="Extensions.Pack" Version="5.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.5"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+        <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
+        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+        <PackageReference Include="AspNetCore.Simple.Sdk" Version="5.0.1" />
+        <PackageReference Include="Extensions.Pack" Version="5.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.5" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     </ItemGroup>
 
 </Project>

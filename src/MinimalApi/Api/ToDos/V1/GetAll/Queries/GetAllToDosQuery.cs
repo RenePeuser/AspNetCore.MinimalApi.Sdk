@@ -1,4 +1,6 @@
-﻿namespace MinimalApi.Api.ToDos.V1.GetAll
+﻿using MinimalApi.Api.ToDos.V1.DbContext;
+
+namespace MinimalApi.Api.ToDos.V1.GetAll
 {
     internal static class AddGetAllToDosQueryExtension
     {
@@ -8,23 +10,11 @@
         }
     }
 
-    internal sealed class GetAllToDosQuery
+    internal sealed class GetAllToDosQuery(TodoRepository todoRepository)
     {
-        private readonly Todo[] sampleTodos =
-        {
-            new()
-            {
-                Notes = new Notes { Hint = "Cool stuff", Key = "CS" },
-                DueBy = DateOnly.FromDateTime(DateTime.Now),
-                Id = 1,
-                IsComplete = true,
-                Title = "Walk with the dog"
-            }
-        };
-
         internal IEnumerable<Todo> Execute()
         {
-            return sampleTodos;
+            return todoRepository.GetAll();
         }
     }
 }
