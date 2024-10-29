@@ -6,6 +6,8 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Get
     {
         internal static void AddGetCommandHandler(this IServiceCollection services)
         {
+            services.AddOutputService();
+            
             services.AddSingletonIfNotExists<GetCommandHandler>();
         }
     }

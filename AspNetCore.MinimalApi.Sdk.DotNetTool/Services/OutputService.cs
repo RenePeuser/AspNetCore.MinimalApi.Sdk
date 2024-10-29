@@ -6,6 +6,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
     {
         public static void AddOutputService(this IServiceCollection services)
         {
+            services.AddOutputFormatter();
+            services.AddOutputWriter();
+
             services.AddSingletonIfNotExists<OutputService>();
         }
     }

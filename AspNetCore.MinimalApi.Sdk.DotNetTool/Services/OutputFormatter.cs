@@ -1,7 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Get.Options;
 using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool

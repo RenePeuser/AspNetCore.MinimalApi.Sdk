@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Extensions.Pack;
+﻿using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
 {

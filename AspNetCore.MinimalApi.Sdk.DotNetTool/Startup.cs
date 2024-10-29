@@ -1,6 +1,4 @@
-using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {

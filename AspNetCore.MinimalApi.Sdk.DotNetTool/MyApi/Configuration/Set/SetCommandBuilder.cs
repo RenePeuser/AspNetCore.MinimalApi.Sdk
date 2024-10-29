@@ -1,6 +1,5 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Invocation;
-using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo;
 using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
