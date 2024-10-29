@@ -2,11 +2,11 @@
   "profiles": {
     "AspNetCore.MinimalApi.Sdk.DotNetTool": {
       "commandName": "Project",
-      "commandLineArgs": "myapi todo v1 getalltodos",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:60853;http://localhost:60854"
     }
   }
 }

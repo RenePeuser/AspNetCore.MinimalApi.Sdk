@@ -1,8 +1,5 @@
 using System.Net.Http.Headers;
 using Extensions.Pack;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {

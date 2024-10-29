@@ -1,6 +1,5 @@
-using System.CommandLine.Invocation;
+﻿using System.CommandLine.Invocation;
 using Extensions.Pack;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
@@ -30,7 +29,13 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                 }
                 else
                 {
-                    consoleService.WriteError(ex.ToString());
+                    var problemDetails = new ProblemDetails
+                    {
+                        Title = $"Unexpected {ex.GetType().Name} occured",
+                        Detail = ex.Message,
+                        Status = 500
+                    };
+                    consoleService.WriteError(problemDetails.ToJsonIntended());
                 }
 
                 context.ResultCode = 1;

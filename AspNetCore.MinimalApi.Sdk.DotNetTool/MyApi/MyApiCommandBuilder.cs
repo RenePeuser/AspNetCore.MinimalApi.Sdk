@@ -1,7 +1,5 @@
 using System.CommandLine;
-using System.CommandLine.Invocation;
 using Extensions.Pack;
-using Microsoft.Extensions.DependencyInjection;
 using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi
