@@ -1,4 +1,4 @@
 ﻿namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
 {
-    internal sealed record GetParameters(string Json);
+    internal sealed record SetParameters(string Json);
 }

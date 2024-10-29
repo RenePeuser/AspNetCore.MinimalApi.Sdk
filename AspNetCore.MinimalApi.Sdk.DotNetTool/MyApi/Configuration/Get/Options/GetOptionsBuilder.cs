@@ -15,14 +15,33 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Get.Options
     {
         public IEnumerable<Option> Build()
         {
-            yield return BuildFormatAsStringOption();
+            yield return BuildFormatOption();
+            yield return BuildOutputOption();
         }
 
-        private Option BuildFormatAsStringOption()
+        private Option BuildFormatOption()
         {
-            return new Option(["--formatAsString", "-fas"], "Provides the output as flatten string")
+            return new Option(["--format", "-f"], "Provides in which type the output should be created")
             {
                 Required = false,
+                Argument = new Argument<FormatType>
+                {
+                    Name = "format",
+                    Description = "You can pass an available format, as long the endpoint provides to transform the output into the requested format."
+                }
+            };
+        }
+
+        private Option BuildOutputOption()
+        {
+            return new Option(["--output", "-o"], "Provides in which type the output should be created")
+            {
+                Required = false,
+                Argument = new Argument<FileInfo>
+                {
+                    Name = "output",
+                    Description = @"Writes the output in your provided file. Sample: 'D:\Documents\MyFile.txt'"
+                }
             };
         }
     }

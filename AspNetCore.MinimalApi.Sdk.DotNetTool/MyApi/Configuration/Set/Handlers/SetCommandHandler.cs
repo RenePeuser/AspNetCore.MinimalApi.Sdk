@@ -11,20 +11,15 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
         }
     }
 
-    internal sealed class SetCommandHandler(ConsoleService consoleService)
+    internal sealed class SetCommandHandler(OutputService outputService)
     {
-        public async Task HandleAsync(GetParameters setParameters)
+        public async Task HandleAsync(SetParameters setParameters)
         {
-            // 1. Format incoming JSON string
-            using var doc = JsonDocument.Parse(setParameters.Json);
-
-            var jsonIntendedFormatted = doc.ToJsonIntended();
-
-            // 1. Check if an appsettings.json exists on file
+            // 1. Define target file
             var appsettingsOnDisk = new FileInfo(Path.Combine(Environment.CurrentDirectory, "appsettings.json"));
-            await File.WriteAllTextAsync(appsettingsOnDisk.FullName, jsonIntendedFormatted).ConfigureAwait(false);
 
-            consoleService.WriteSuccess($"New appsettings successful written into: {appsettingsOnDisk.FullName}.");
+            // 2. Write output
+            await outputService.WriteAsync(setParameters.Json, appsettingsOnDisk, FormatType.JsonIndented).ConfigureAwait(false);
         }
     }
 }

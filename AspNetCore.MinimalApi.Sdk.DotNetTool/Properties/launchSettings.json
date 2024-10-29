@@ -2,7 +2,7 @@
   "profiles": {
     "AspNetCore.MinimalApi.Sdk.DotNetTool": {
       "commandName": "Project",
-      "commandLineArgs": "myapi configuration get --formatAsString",     
+      "commandLineArgs": "myapi configuration get",     
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

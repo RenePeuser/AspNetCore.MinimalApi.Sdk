@@ -23,7 +23,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Get
         {
             var getCommand = new Command("get", "Command to read the whole configuration for your dotnet tool. Known as appsettings");
             getOptionsBuilder.Build().ToList().ForEach(option => getCommand.AddOption(option));
-            getCommand.Handler = CommandHandler.Create<bool>((formatAsString) => getCommandHandler.HandleAsync(new GetParameters(formatAsString)));
+            getCommand.Handler = CommandHandler.Create<FormatType, FileInfo?>((output, format) => getCommandHandler.HandleAsync(new GetParameters(output, format)));
             return getCommand;
         }
     }

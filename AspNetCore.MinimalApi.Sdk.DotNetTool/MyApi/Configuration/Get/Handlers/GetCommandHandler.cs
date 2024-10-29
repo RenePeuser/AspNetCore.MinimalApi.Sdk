@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Extensions.Pack;
+﻿using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Get
 {
@@ -11,10 +10,8 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Get
         }
     }
 
-    internal sealed class GetCommandHandler(ConsoleService consoleService)
+    internal sealed class GetCommandHandler(OutputService outputService)
     {
-        private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions() { WriteIndented = false };
-
         public async Task HandleAsync(GetParameters getParameters)
         {
             // 1. If not provide the embedded version
@@ -27,21 +24,8 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Get
                 appsettings = await File.ReadAllTextAsync(appsettingsOnDisk.FullName).ConfigureAwait(false);
             }
 
-            // 3. If FormatAsString is true, re-serialize to a single-line JSON string
-            if (getParameters.FormatAsString)
-            {
-                var jsonObject = JsonSerializer.Deserialize<object>(appsettings);
-                appsettings = JsonSerializer.Serialize(jsonObject, _jsonSerializerOptions);
-
-                // Escape double quotes
-                appsettings = appsettings.Replace("\"", "\\\"");
-
-                // Wrap it in double quotes to produce the desired output
-                appsettings = $"\"{appsettings}\"";
-
-            }
-
-            consoleService.WriteSuccess(appsettings);
+            // 3. Write the formatted string to the output
+            await outputService.WriteAsync(appsettings, getParameters.Output, getParameters.Format).ConfigureAwait(false);
         }
     }
 }

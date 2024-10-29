@@ -23,7 +23,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
         {
             var setCommand = new Command("set", "Command to set the whole configuration for your dotnet tool. Known as appsettings. To set the configuration call 'configuration get' change the settings you want to change and call 'configuration set' to set the whole json back");
             setCommand.AddArgument(setArgumentBuilder.Build());
-            setCommand.Handler = CommandHandler.Create<string>((json) => setCommandHandler.HandleAsync(new GetParameters(json)));
+            setCommand.Handler = CommandHandler.Create<string>((json) => setCommandHandler.HandleAsync(new SetParameters(json)));
             return setCommand;
         }
     }

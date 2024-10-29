@@ -1,6 +1,6 @@
 ﻿using Extensions.Pack;
 
-namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
+namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
 {
     internal static class AddSetArgumentBuilderExtension
     {
