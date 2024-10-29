@@ -64,9 +64,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                       FormatType formatType);
     }
 
-    public static class AddJsonFormatterExtension
+    internal static class AddJsonFormatterExtension
     {
-        public static void AddJsonFormatter(this IServiceCollection services)
+        internal static void AddJsonFormatter(this IServiceCollection services)
         {
             services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonFormatterStrategy>();
         }
@@ -98,9 +98,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
 
-    public static class AddJsonIndentedFormatterExtension
+    internal static class AddJsonIndentedFormatterExtension
     {
-        public static void AddJsonIndentedFormatter(this IServiceCollection services)
+        internal static void AddJsonIndentedFormatter(this IServiceCollection services)
         {
             services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonIndentedFormatterStrategy>();
         }
@@ -132,9 +132,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
 
-    public static class AddJsonAsOutputFormatterExtension
+    internal static class AddJsonAsOutputFormatterExtension
     {
-        public static void AddJsonAsOutputFormatter(this IServiceCollection services)
+        internal static void AddJsonAsOutputFormatter(this IServiceCollection services)
         {
             services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonAsOutputFormatterStrategy>();
         }
@@ -182,9 +182,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
 
-    public static class AddJsonIndentedAsOutputFormatterExtension
+    internal static class AddJsonIndentedAsOutputFormatterExtension
     {
-        public static void AddJsonIndentedAsOutputFormatter(this IServiceCollection services)
+        internal static void AddJsonIndentedAsOutputFormatter(this IServiceCollection services)
         {
             services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonIndentedAsOutputFormatterStrategy>();
         }

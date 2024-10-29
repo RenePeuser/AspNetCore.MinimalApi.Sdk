@@ -13,7 +13,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Get.Options
 
     internal sealed class GetOptionsBuilder
     {
-        public IEnumerable<Option> Build()
+        internal IEnumerable<Option> Build()
         {
             yield return BuildFormatOption();
             yield return BuildOutputOption();

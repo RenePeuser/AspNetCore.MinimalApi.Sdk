@@ -1,4 +1,4 @@
-using Extensions.Pack;
+﻿using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.UpdateToDoById
 {
@@ -12,7 +12,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.UpdateToDoById
 
     internal sealed class UpdateToDoByIdArgumentBuilder
     {
-        public System.CommandLine.Argument Build()
+        internal System.CommandLine.Argument Build()
         {
             var argument = new System.CommandLine.Argument<string>()
             {

@@ -7,14 +7,14 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Get
         internal static void AddGetCommandHandler(this IServiceCollection services)
         {
             services.AddOutputService();
-            
+
             services.AddSingletonIfNotExists<GetCommandHandler>();
         }
     }
 
     internal sealed class GetCommandHandler(OutputService outputService)
     {
-        public async Task HandleAsync(GetParameters getParameters)
+        internal async Task HandleAsync(GetParameters getParameters)
         {
             // 1. If not provide the embedded version
             var appsettings = EmbeddedFile.GetFileContentFrom("appsettings.json");

@@ -2,9 +2,9 @@
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
-    public static class AddOutputServiceExtension
+    internal static class AddOutputServiceExtension
     {
-        public static void AddOutputService(this IServiceCollection services)
+        internal static void AddOutputService(this IServiceCollection services)
         {
             services.AddOutputFormatter();
             services.AddOutputWriter();

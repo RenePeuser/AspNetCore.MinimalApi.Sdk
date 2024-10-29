@@ -12,7 +12,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
 
     internal sealed class SetArgumentBuilder
     {
-        public System.CommandLine.Argument Build()
+        internal System.CommandLine.Argument Build()
         {
             var argument = new System.CommandLine.Argument<string>()
             {

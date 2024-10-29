@@ -1,4 +1,4 @@
-using System.CommandLine;
+﻿using System.CommandLine;
 using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.DeleteToDoById
@@ -13,7 +13,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.DeleteToDoById
 
     internal sealed class DeleteToDoByIdOptionsBuilder
     {
-        public IEnumerable<Option> Build()
+        internal IEnumerable<Option> Build()
         {
             yield return BuildtokenOption();
         }

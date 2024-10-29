@@ -1,4 +1,4 @@
-using Extensions.Pack;
+﻿using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
@@ -12,7 +12,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 
     internal sealed class MyApiArgumentFixer
     {
-        public string[] Fix(string[] args)
+        internal string[] Fix(string[] args)
         {
             var defaultArgs = new[]
             {

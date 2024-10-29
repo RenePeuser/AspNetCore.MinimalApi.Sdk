@@ -1,4 +1,4 @@
-using System.CommandLine;
+﻿using System.CommandLine;
 using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.GetAllToDos
@@ -13,7 +13,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.GetAllToDos
 
     internal sealed class GetAllToDosOptionsBuilder
     {
-        public IEnumerable<Option> Build()
+        internal IEnumerable<Option> Build()
         {
             yield return BuildtokenOption();
         }

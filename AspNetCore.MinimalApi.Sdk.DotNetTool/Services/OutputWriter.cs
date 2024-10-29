@@ -2,9 +2,9 @@
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
-    public static class AddOutputWriterExtension
+    internal static class AddOutputWriterExtension
     {
-        public static void AddOutputWriter(this IServiceCollection services)
+        internal static void AddOutputWriter(this IServiceCollection services)
         {
             services.AddSingletonIfNotExists<OutputWriter>();
         }

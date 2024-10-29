@@ -12,7 +12,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
 
     internal sealed class SetCommandHandler(OutputService outputService)
     {
-        public async Task HandleAsync(SetParameters setParameters)
+        internal async Task HandleAsync(SetParameters setParameters)
         {
             // 1. Define target file
             var appsettingsOnDisk = new FileInfo(Path.Combine(Environment.CurrentDirectory, "appsettings.json"));

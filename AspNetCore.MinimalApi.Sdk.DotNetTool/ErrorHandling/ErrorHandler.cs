@@ -1,4 +1,4 @@
-using System.CommandLine.Invocation;
+﻿using System.CommandLine.Invocation;
 using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
@@ -14,7 +14,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 
     internal sealed class ErrorHandler(ConsoleService consoleService)
     {
-        public async Task HandleErrorsAsync(InvocationContext context, Func<InvocationContext, Task> next)
+        internal async Task HandleErrorsAsync(InvocationContext context, Func<InvocationContext, Task> next)
         {
             try
             {

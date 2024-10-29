@@ -13,7 +13,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
 
     internal sealed class AddToDoOptionsBuilder
     {
-        public IEnumerable<Option> Build()
+        internal IEnumerable<Option> Build()
         {
             yield return BuildtokenOption();
         }

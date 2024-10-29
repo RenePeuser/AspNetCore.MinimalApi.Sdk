@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Net;
 using Extensions.Pack;
 
@@ -49,6 +49,6 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
             ProblemDetails = problemDetails;
         }
 
-        public ProblemDetails ProblemDetails { get; }
+        internal ProblemDetails ProblemDetails { get; }
     }
 }

@@ -1,4 +1,4 @@
-using Extensions.Pack;
+﻿using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V2.GetAllToDos
 {
@@ -13,7 +13,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V2.GetAllToDos
 
     internal sealed class GetAllToDosHandler(ConsoleService consoleService, MyApiHttpClientFactory myApiHttpClientFactory)
     {
-        public async Task HandleAsync(GetAllToDosParameters parameters)
+        internal async Task HandleAsync(GetAllToDosParameters parameters)
         {
             // 1. create client
             var httpCallHandler = myApiHttpClientFactory.CreateFrom(parameters.Token);

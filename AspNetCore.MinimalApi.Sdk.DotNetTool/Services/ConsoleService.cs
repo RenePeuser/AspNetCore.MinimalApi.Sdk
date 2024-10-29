@@ -1,4 +1,4 @@
-using Extensions.Pack;
+﻿using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
@@ -12,38 +12,38 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 
     internal sealed class ConsoleService
     {
-        public void WriteLine()
+        internal void WriteLine()
         {
             Console.WriteLine();
         }
 
-        public void WriteInfo(string value)
+        internal void WriteInfo(string value)
         {
             WriteLine(value);
         }
 
-        public void WriteInput(string value)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            WriteLine(value);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
-        public void WriteSuccess(string value)
+        internal void WriteInput(string value)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             WriteLine(value);
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        public string ReadLine()
+        internal void WriteSuccess(string value)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            WriteLine(value);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        internal string ReadLine()
         {
             var result = Console.ReadLine();
             Console.WriteLine();
             return result ?? string.Empty;
         }
 
-        public void WriteSample(string value)
+        internal void WriteSample(string value)
         {
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine(value);
@@ -51,7 +51,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        public void WriteError(string value)
+        internal void WriteError(string value)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             WriteLine(value);

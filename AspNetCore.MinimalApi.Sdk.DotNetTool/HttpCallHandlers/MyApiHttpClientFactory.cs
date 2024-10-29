@@ -1,4 +1,4 @@
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
@@ -28,7 +28,8 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
             "x-",
             "Referer"
         };
-        public HttpCallHandler CreateFrom(HttpRequest httpRequest)
+
+        internal HttpCallHandler CreateFrom(HttpRequest httpRequest)
         {
             var httpClient = httpClientFactory.CreateClient();
             httpRequest.Headers.ForEach(headerEntry =>
@@ -44,12 +45,12 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
             return httpClientHandler;
         }
 
-        public HttpCallHandler CreateFrom(string schema, string token)
+        internal HttpCallHandler CreateFrom(string schema, string token)
         {
             return CreateFrom($"{schema} {token}");
         }
 
-        public HttpCallHandler CreateFrom(string token)
+        internal HttpCallHandler CreateFrom(string token)
         {
             var httpClient = httpClientFactory.CreateClient();
             httpClient.BaseAddress = new Uri(aspNetCoreMinimalApiSdkClientSettings.BaseAddress);
@@ -60,9 +61,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
 
-    public static class AddMyApiHttpClientSettingsExtension
+    internal static class AddMyApiHttpClientSettingsExtension
     {
-        public static void AddMyApiHttpClientSettings(this IServiceCollection services, IConfiguration configuration)
+        internal static void AddMyApiHttpClientSettings(this IServiceCollection services, IConfiguration configuration)
         {
             if (configuration.TryGetSettings<MyApiHttpClientSettings>(out var clientSettings).IsFalse())
             {
@@ -73,7 +74,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
 
-    public record MyApiHttpClientSettings
+    internal sealed record MyApiHttpClientSettings
     {
         public string BaseAddress { get; init; } = "http://staging/api/MyApi/";
     }

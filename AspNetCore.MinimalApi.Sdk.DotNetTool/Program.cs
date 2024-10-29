@@ -1,6 +1,6 @@
-namespace AspNetCore.MinimalApi.Sdk.DotNetTool
+﻿namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
-    public static class Program
+    internal static class Program
     {
         public static Task<int> Main(string[] args)
         {
