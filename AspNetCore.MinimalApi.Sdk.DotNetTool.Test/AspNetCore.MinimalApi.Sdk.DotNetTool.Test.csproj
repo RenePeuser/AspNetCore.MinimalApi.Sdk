@@ -10,9 +10,13 @@
 
     <ItemGroup>
       <None Remove="MyApi\Config\Get\Output\GetAsJson.json" />
+      <None Remove="MyApi\Config\Get\Output\GetAsJsonAsString.json" />
+      <None Remove="MyApi\Config\Get\Output\GetAsJsonIndented.json" />
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJsonIndented.json" />
+      <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJsonAsString.json" />
       <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJson.json" />
     </ItemGroup>
 

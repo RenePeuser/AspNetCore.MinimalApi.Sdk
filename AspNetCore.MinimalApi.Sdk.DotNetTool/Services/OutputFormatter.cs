@@ -12,7 +12,6 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
             services.AddJsonFormatterStrategy();
             services.AddJsonIndentedFormatterStrategy();
             services.AddJsonAsStringFormatterStrategy();
-            services.AddJsonIndentedAsStringFormatterStrategy();
 
             services.AddSingletonIfNotExists<OutputFormatter>();
         }
@@ -21,12 +20,8 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
     internal enum FormatType
     {
         Json,
-
         JsonIndented,
-
         JsonAsString,
-
-        JsonIndentedAsString,
     }
 
     internal sealed class OutputFormatter(IEnumerable<IOutputFormatterStrategy> stringFormatterStrategies)
@@ -169,55 +164,6 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                                                   ("CanHandle", FormatType.JsonAsString));
             }
 
-
-            // 2. Convert into object
-            using var doc = JsonDocument.Parse(value);
-
-            // 3. Serialize into json with specific options
-            var json = JsonSerializer.Serialize(doc, _jsonSerializerOptions);
-
-            // 4. Escape double quotes
-            json = json.Replace("\"", "\\\"");
-
-            // 5. Wrap it in double quotes to produce the desired output
-            json = $"\"{json}\"";
-
-            // 6. Return the formatted json
-            return json;
-        }
-    }
-
-    internal static class AddJsonIndentedAsStringFormatterStrategyExtension
-    {
-        internal static void AddJsonIndentedAsStringFormatterStrategy(this IServiceCollection services)
-        {
-            services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonIndentedAsStringFormatterStrategy>();
-        }
-    }
-
-    internal sealed class JsonIndentedAsStringFormatterStrategy : IOutputFormatterStrategy
-    {
-        private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions()
-        {
-            WriteIndented = true,
-            Converters = { new JsonStringEnumConverter() }
-        };
-
-        public bool CanHandle(FormatType formatType)
-        {
-            return formatType == FormatType.JsonIndentedAsString;
-        }
-
-        public string Format(string value,
-                             FormatType formatType)
-        {
-            // 1. Safety first this method can be called without CanHandle check !
-            if (CanHandle(formatType).IsFalse())
-            {
-                throw new ProblemDetailsException("JsonFormatterStrategy was called without checking CanHandle.",
-                                                  $"The string formatter strategy: {nameof(JsonIndentedAsStringFormatterStrategy)} can not process your request",
-                                                  ("CanHandle", FormatType.JsonIndentedAsString));
-            }
 
             // 2. Convert into object
             using var doc = JsonDocument.Parse(value);

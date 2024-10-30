@@ -8,11 +8,10 @@
         [DataRow("Json")]
         [DataRow("JsonIndented")]
         [DataRow("JsonAsString")]
-        [DataRow("JsonIndentedAsString")]
         public Task Get_Config_Test_With_Specific_Format(string format)
         {
             return Cli.AssertRunAsync($"myapi config get --format {format}",
-                                      "MyApi.Config.Get.Output.GetAsJson.json");
+                                      $"MyApi.Config.Get.Output.GetAs{format}.json");
         }
 
     }

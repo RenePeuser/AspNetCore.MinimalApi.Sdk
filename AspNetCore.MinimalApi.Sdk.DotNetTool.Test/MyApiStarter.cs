@@ -25,13 +25,10 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
             await using var sw = new StringWriter();
             var strings = consoleArguments;
             var consoleCall = strings.Flatten(" ");
-            Console.WriteLine();
             Console.WriteLine(consoleCall);
-            Debug.WriteLine(consoleCall);
             Console.SetOut(sw);
             var exitCode = await Program.Main(strings).ConfigureAwait(false);
             var output = sw.ToString();
-
 
             return new CliRunResult(output, exitCode);
         }
@@ -60,6 +57,10 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
             var expected = JsonNode.Parse(expectedOutput);
 
             Assert.That.ObjectsAreEqual(expected, current, expectedResultParameterName: expectedResultName);
+
+            Console.SetOut(TextWriter.Null);
+            
+            Console.WriteLine(result.Output);
 
             return result.Output;
         }

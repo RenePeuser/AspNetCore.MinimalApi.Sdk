@@ -1,1 +1,1 @@
-{ "MyApiHttpClientSettings": { "BaseAddress": "https://localhost:7321/" } }
+{ "MyApiHttpClientSettings": { "BaseAddress": "https://localhost:7221/" } }
