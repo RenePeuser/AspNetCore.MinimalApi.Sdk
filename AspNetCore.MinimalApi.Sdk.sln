@@ -19,7 +19,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.DotNetTool", "AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj", "{F380FFA0-8DD1-413E-86AD-273A7EDA6AF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.DotNetTool.Test", "AspNetCore.MinimalApi.Sdk.DotNetTool.Test\AspNetCore.MinimalApi.Sdk.DotNetTool.Test.csproj", "{F0418206-D059-4D08-AB19-BC4DD78D701C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.DotNetTool.Test", "AspNetCore.MinimalApi.Sdk.DotNetTool.Test\AspNetCore.MinimalApi.Sdk.DotNetTool.Test.csproj", "{F0418206-D059-4D08-AB19-BC4DD78D701C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{372DF940-A7B0-468D-8F0B-A66EEE36B83D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

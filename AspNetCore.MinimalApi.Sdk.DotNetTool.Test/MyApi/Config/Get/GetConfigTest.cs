@@ -13,7 +13,6 @@
             return Cli.AssertRunAsync($"myapi config get --format {format}",
                                       $"MyApi.Config.Get.Output.GetAs{format}.json");
         }
-
     }
 
     //internal sealed record GetConfig() : IRequest;

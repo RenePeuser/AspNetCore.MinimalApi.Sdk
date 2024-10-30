@@ -12,12 +12,20 @@
       <None Remove="MyApi\Config\Get\Output\GetAsJson.json" />
       <None Remove="MyApi\Config\Get\Output\GetAsJsonAsString.json" />
       <None Remove="MyApi\Config\Get\Output\GetAsJsonIndented.json" />
+      <None Remove="MyApi\Config\Set\Output\GetConfig.json" />
+      <None Remove="MyApi\Config\Set\Output\GetConfigAfterUpdate.json" />
+      <None Remove="MyApi\Config\Set\Output\SetConfig.json" />
+      <None Remove="MyApi\Config\Set\Parameters\OriginalAppSettings.json" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJsonIndented.json" />
       <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJsonAsString.json" />
       <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJson.json" />
+      <EmbeddedResource Include="MyApi\Config\Set\Output\SetConfig.json" />
+      <EmbeddedResource Include="MyApi\Config\Set\Output\GetConfigAfterUpdate.json" />
+      <EmbeddedResource Include="MyApi\Config\Set\Output\GetConfig.json" />
+      <EmbeddedResource Include="MyApi\Config\Set\Parameters\OriginalAppSettings.json" />
     </ItemGroup>
 
     <ItemGroup>
@@ -35,10 +43,6 @@
 
     <ItemGroup>
         <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="MyApi\Config\Set\" />
     </ItemGroup>
 
     <ItemGroup>

@@ -173,6 +173,7 @@ dotnet_diagnostic.IDE0302.severity = suggestion
 dotnet_diagnostic.IDE0303.severity = suggestion
 dotnet_diagnostic.IDE0304.severity = suggestion
 dotnet_diagnostic.IDE0305.severity = suggestion
+dotnet_diagnostic.IDE0055.severity = suggestion
 ###############################
 # VB Coding Conventions       #
 ###############################
