@@ -1,4 +1,4 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 using Microsoft.Extensions.Configuration.Json;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool

@@ -1,4 +1,4 @@
-﻿using System.CommandLine;
+using System.CommandLine;
 using System.CommandLine.Invocation;
 using Extensions.Pack;
 
@@ -22,7 +22,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.DeleteToDoById
             var command = new Command("deletetodobyid", "Here comes the description for DeleteToDoById");
             optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
             command.AddArgument(argumentBuilder.Build());
-            command.Handler = CommandHandler.Create<string, string>((json, token) => deleteToDoByIdHandler.HandleAsync(new DeleteToDoByIdParameters(json, token)));
+            command.Handler = CommandHandler.Create<string, FormatType, FileInfo?, string>((json, format, output, token) => deleteToDoByIdHandler.HandleAsync(new DeleteToDoByIdParameters(json, format, output, token)));
             return command;
         }
     }

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -131,7 +131,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
     [JsonConverter(typeof(ProblemDetailsJsonConverter))]
-    internal sealed class ProblemDetails
+    public sealed class ProblemDetails
     {
         /// <summary>
         /// A URI reference [RFC3986] that identifies the problem type. This specification encourages that, when

@@ -22,7 +22,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
             var command = new Command("addtodo", "Here comes the description for AddToDo");
             optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
             command.AddArgument(argumentBuilder.Build());
-            command.Handler = CommandHandler.Create<string, string>((json, token) => addToDoHandler.HandleAsync(new AddToDoParameters(json, token)));
+            command.Handler = CommandHandler.Create<string, FormatType, FileInfo?, string>((json, format, output, token) => addToDoHandler.HandleAsync(new AddToDoParameters(json, format, output, token)));
             return command;
         }
     }

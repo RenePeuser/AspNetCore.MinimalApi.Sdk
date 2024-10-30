@@ -1,4 +1,4 @@
-﻿using System.CommandLine;
+using System.CommandLine;
 using System.CommandLine.Invocation;
 using Extensions.Pack;
 
@@ -20,7 +20,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V2.GetAllToDos
         {
             var command = new Command("getalltodos", "Here comes the description for GetAllToDos");
             optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
-            command.Handler = CommandHandler.Create<string>((token) => getAllToDosHandler.HandleAsync(new GetAllToDosParameters(token)));
+            command.Handler = CommandHandler.Create<FormatType, FileInfo?, string>((format, output, token) => getAllToDosHandler.HandleAsync(new GetAllToDosParameters(format, output, token)));
             return command;
         }
     }

@@ -24,6 +24,7 @@
     <OutputType>Exe</OutputType>
     <PackAsTool>true</PackAsTool>
     <IsPackable>true</IsPackable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <ToolCommandName>myapi</ToolCommandName>
   </PropertyGroup>
   <!--Embedded files area-->

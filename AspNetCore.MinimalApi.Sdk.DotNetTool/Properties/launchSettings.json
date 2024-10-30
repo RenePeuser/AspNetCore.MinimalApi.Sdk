@@ -2,12 +2,11 @@
   "profiles": {
     "AspNetCore.MinimalApi.Sdk.DotNetTool": {
       "commandName": "Project",
-      "commandLineArgs": "myapi configuration get",     
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:63471;http://localhost:63472"
+      "applicationUrl": "https://localhost:60737;http://localhost:60738"
     }
   }
 }

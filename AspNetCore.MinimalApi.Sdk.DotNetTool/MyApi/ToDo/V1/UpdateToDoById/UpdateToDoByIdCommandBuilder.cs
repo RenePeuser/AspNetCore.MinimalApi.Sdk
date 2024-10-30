@@ -22,7 +22,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.UpdateToDoById
             var command = new Command("updatetodobyid", "Here comes the description for UpdateToDoById");
             optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
             command.AddArgument(argumentBuilder.Build());
-            command.Handler = CommandHandler.Create<string, string>((json, token) => updateToDoByIdHandler.HandleAsync(new UpdateToDoByIdParameters(json, token)));
+            command.Handler = CommandHandler.Create<string, FormatType, FileInfo?, string>((json, format, output, token) => updateToDoByIdHandler.HandleAsync(new UpdateToDoByIdParameters(json, format, output, token)));
             return command;
         }
     }

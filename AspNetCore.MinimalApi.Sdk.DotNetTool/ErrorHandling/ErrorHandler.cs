@@ -1,4 +1,4 @@
-﻿using System.CommandLine.Invocation;
+using System.CommandLine.Invocation;
 using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool

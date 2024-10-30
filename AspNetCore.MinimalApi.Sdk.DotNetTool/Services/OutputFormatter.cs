@@ -9,6 +9,11 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
     {
         internal static void AddOutputFormatter(this IServiceCollection services)
         {
+            services.AddJsonFormatterStrategy();
+            services.AddJsonIndentedFormatterStrategy();
+            services.AddJsonAsStringFormatterStrategy();
+            services.AddJsonIndentedAsStringFormatterStrategy();
+
             services.AddSingletonIfNotExists<OutputFormatter>();
         }
     }
@@ -64,9 +69,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                       FormatType formatType);
     }
 
-    internal static class AddJsonFormatterExtension
+    internal static class AddJsonFormatterStrategyExtension
     {
-        internal static void AddJsonFormatter(this IServiceCollection services)
+        internal static void AddJsonFormatterStrategy(this IServiceCollection services)
         {
             services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonFormatterStrategy>();
         }
@@ -83,7 +88,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                              FormatType formatType)
         {
             // 1. Safety first this method can be called without CanHandle check !
-            if (CanHandle(formatType))
+            if (CanHandle(formatType).IsFalse())
             {
                 throw new ProblemDetailsException("JsonFormatterStrategy was called without checking CanHandle.",
                                                   $"The string formatter strategy: {nameof(JsonFormatterStrategy)} can not process your request",
@@ -98,9 +103,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
 
-    internal static class AddJsonIndentedFormatterExtension
+    internal static class AddJsonIndentedFormatterStrategyExtension
     {
-        internal static void AddJsonIndentedFormatter(this IServiceCollection services)
+        internal static void AddJsonIndentedFormatterStrategy(this IServiceCollection services)
         {
             services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonIndentedFormatterStrategy>();
         }
@@ -117,7 +122,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                              FormatType formatType)
         {
             // 1. Safety first this method can be called without CanHandle check !
-            if (CanHandle(formatType))
+            if (CanHandle(formatType).IsFalse())
             {
                 throw new ProblemDetailsException("JsonFormatterStrategy was called without checking CanHandle.",
                                                   $"The string formatter strategy: {nameof(JsonIndentedFormatterStrategy)} can not process your request",
@@ -132,15 +137,15 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
 
-    internal static class AddJsonAsOutputFormatterExtension
+    internal static class AddJsonAsStringFormatterStrategyExtension
     {
-        internal static void AddJsonAsOutputFormatter(this IServiceCollection services)
+        internal static void AddJsonAsStringFormatterStrategy(this IServiceCollection services)
         {
-            services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonAsOutputFormatterStrategy>();
+            services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonAsStringFormatterStrategy>();
         }
     }
 
-    internal sealed class JsonAsOutputFormatterStrategy : IOutputFormatterStrategy
+    internal sealed class JsonAsStringFormatterStrategy : IOutputFormatterStrategy
     {
         private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions()
         {
@@ -157,10 +162,10 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                              FormatType formatType)
         {
             // 1. Safety first this method can be called without CanHandle check !
-            if (CanHandle(formatType))
+            if (CanHandle(formatType).IsFalse())
             {
                 throw new ProblemDetailsException("JsonFormatterStrategy was called without checking CanHandle.",
-                                                  $"The string formatter strategy: {nameof(JsonAsOutputFormatterStrategy)} can not process your request",
+                                                  $"The string formatter strategy: {nameof(JsonAsStringFormatterStrategy)} can not process your request",
                                                   ("CanHandle", FormatType.JsonAsString));
             }
 
@@ -182,15 +187,15 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
         }
     }
 
-    internal static class AddJsonIndentedAsOutputFormatterExtension
+    internal static class AddJsonIndentedAsStringFormatterStrategyExtension
     {
-        internal static void AddJsonIndentedAsOutputFormatter(this IServiceCollection services)
+        internal static void AddJsonIndentedAsStringFormatterStrategy(this IServiceCollection services)
         {
-            services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonIndentedAsOutputFormatterStrategy>();
+            services.AddSingletonIfNotExists<IOutputFormatterStrategy, JsonIndentedAsStringFormatterStrategy>();
         }
     }
 
-    internal sealed class JsonIndentedAsOutputFormatterStrategy : IOutputFormatterStrategy
+    internal sealed class JsonIndentedAsStringFormatterStrategy : IOutputFormatterStrategy
     {
         private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions()
         {
@@ -207,10 +212,10 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                              FormatType formatType)
         {
             // 1. Safety first this method can be called without CanHandle check !
-            if (CanHandle(formatType))
+            if (CanHandle(formatType).IsFalse())
             {
                 throw new ProblemDetailsException("JsonFormatterStrategy was called without checking CanHandle.",
-                                                  $"The string formatter strategy: {nameof(JsonIndentedAsOutputFormatterStrategy)} can not process your request",
+                                                  $"The string formatter strategy: {nameof(JsonIndentedAsStringFormatterStrategy)} can not process your request",
                                                   ("CanHandle", FormatType.JsonIndentedAsString));
             }
 

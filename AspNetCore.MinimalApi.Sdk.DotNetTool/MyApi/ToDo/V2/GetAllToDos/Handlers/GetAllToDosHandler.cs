@@ -1,4 +1,4 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V2.GetAllToDos
 {
@@ -11,15 +11,16 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V2.GetAllToDos
         }
     }
 
-    internal sealed class GetAllToDosHandler(ConsoleService consoleService, MyApiHttpClientFactory myApiHttpClientFactory)
+    internal sealed class GetAllToDosHandler(OutputService outputService, MyApiHttpClientFactory myApiHttpClientFactory)
     {
-        internal async Task HandleAsync(GetAllToDosParameters parameters)
+        public async Task HandleAsync(GetAllToDosParameters parameters)
         {
             // 1. create client
             var httpCallHandler = myApiHttpClientFactory.CreateFrom(parameters.Token);
             // Get the response as string -> only OK responses are provided here, error will be handled as exception
             var stringResponse = await httpCallHandler.CallAsync(HttpMethod.Get, $"api/v2.0/todos", null, CancellationToken.None).ConfigureAwait(false);
-            consoleService.WriteSuccess(stringResponse);
+            // 3. Write the formatted string to the output
+            await outputService.WriteAsync(stringResponse, parameters.Output, parameters.Format).ConfigureAwait(false);
         }
     }
 }

@@ -1,18 +1,18 @@
 ﻿using Extensions.Pack;
 
-namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Get
+namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Config.Get
 {
-    internal static class AddGetCommandHandlerExtension
+    internal static class AddGetHandlerExtension
     {
-        internal static void AddGetCommandHandler(this IServiceCollection services)
+        internal static void AddGetHandler(this IServiceCollection services)
         {
             services.AddOutputService();
 
-            services.AddSingletonIfNotExists<GetCommandHandler>();
+            services.AddSingletonIfNotExists<GetHandler>();
         }
     }
 
-    internal sealed class GetCommandHandler(OutputService outputService)
+    internal sealed class GetHandler(OutputService outputService)
     {
         internal async Task HandleAsync(GetParameters getParameters)
         {

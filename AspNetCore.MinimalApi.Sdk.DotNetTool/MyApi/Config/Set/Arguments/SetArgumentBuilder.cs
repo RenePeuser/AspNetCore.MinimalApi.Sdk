@@ -1,6 +1,6 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 
-namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
+namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Config.Set
 {
     internal static class AddSetArgumentBuilderExtension
     {
@@ -17,7 +17,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
             var argument = new System.CommandLine.Argument<string>()
             {
                 Name = "json",
-                Description = "The new appsettings json which have to be set and used"
+                Description = "Provide the new config json which is known as appsettings.json"
             };
             return argument;
         }

@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Headers;
+using System.Net.Http.Headers;
 using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
@@ -21,14 +21,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 
     internal sealed class MyApiHttpClientFactory(IHttpClientFactory httpClientFactory, MyApiHttpClientSettings aspNetCoreMinimalApiSdkClientSettings, HttpCallHandlerFactory httpCallHandlerFactory)
     {
-        private readonly string[] _allowedHeadersToCopy =
-        {
-            "User-Agent",
-            "Authorization",
-            "x-",
-            "Referer"
-        };
-
+        private readonly string[] _allowedHeadersToCopy = ["User-Agent", "Authorization", "x-", "Referer"];
         internal HttpCallHandler CreateFrom(HttpRequest httpRequest)
         {
             var httpClient = httpClientFactory.CreateClient();

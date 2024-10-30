@@ -11,9 +11,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
         }
     }
 
-    internal sealed class AddToDoHandler(MyApiHttpClientFactory myApiHttpClientFactory)
+    internal sealed class AddToDoHandler(OutputService outputService, MyApiHttpClientFactory myApiHttpClientFactory)
     {
-        internal async Task HandleAsync(AddToDoParameters parameters)
+        public async Task HandleAsync(AddToDoParameters parameters)
         {
             // 1. create client
             var httpCallHandler = myApiHttpClientFactory.CreateFrom(parameters.Token);
@@ -24,8 +24,11 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
             // 3. Setup all needed variables
             var todo = callInfos["todo"]; // Mandatory
 
-            // 4. Get the response as string -> only OK responses are provided here, error will be handled as exception
+            // Get the response as string -> only OK responses are provided here, error will be handled as exception
             var stringResponse = await httpCallHandler.CallAsync(HttpMethod.Post, $"api/v1.0/todos", todo, CancellationToken.None).ConfigureAwait(false);
+
+            // 3. Write the formatted string to the output
+            await outputService.WriteAsync(stringResponse, parameters.Output, parameters.Format).ConfigureAwait(false);
         }
     }
 }

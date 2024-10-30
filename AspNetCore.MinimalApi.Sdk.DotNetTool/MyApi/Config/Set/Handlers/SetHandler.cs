@@ -1,16 +1,16 @@
 ﻿using Extensions.Pack;
 
-namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Configuration.Set
+namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Config.Set
 {
-    internal static class AddSetCommandHandlerExtension
+    internal static class AddSetHandlerExtension
     {
-        internal static void AddSetCommandHandler(this IServiceCollection services)
+        internal static void AddSetHandler(this IServiceCollection services, IConfiguration _)
         {
-            services.AddSingletonIfNotExists<SetCommandHandler>();
+            services.AddSingletonIfNotExists<SetHandler>();
         }
     }
 
-    internal sealed class SetCommandHandler(OutputService outputService)
+    internal sealed class SetHandler(OutputService outputService)
     {
         internal async Task HandleAsync(SetParameters setParameters)
         {

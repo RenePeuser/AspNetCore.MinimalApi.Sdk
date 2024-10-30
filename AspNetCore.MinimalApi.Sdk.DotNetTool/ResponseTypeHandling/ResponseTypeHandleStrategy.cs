@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
@@ -11,6 +11,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
             services.AddJsonResponseTypeHandler();
             services.AddFileStreamResponseTypeHandler();
             services.AddByteArrayResponseTypeHandler();
+
             services.AddSingletonIfNotExists<ResponseTypeHandleStrategy>();
         }
     }
@@ -18,25 +19,37 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
     internal interface ISpecificResponseTypeHandler
     {
         bool CanHandle<TResult>(HttpResponseMessage responseMessage);
-        Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage, HttpMethod httpMethod, HttpClient httpClient, string url);
+
+        Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage,
+                                           HttpMethod httpMethod,
+                                           HttpClient httpClient,
+                                           string url);
     }
 
-    internal sealed class ResponseTypeHandleStrategy(IEnumerable<ISpecificResponseTypeHandler> handlers)
+    internal sealed class ResponseTypeHandleStrategy(IEnumerable<ISpecificResponseTypeHandler> responseHandlers)
     {
-        internal Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage, HttpMethod httpMethod, HttpClient httpClient, string url)
+        public Task<TResult> HandleAsync<TResult>(HttpResponseMessage responseMessage,
+                                                  HttpMethod httpMethod,
+                                                  HttpClient httpClient,
+                                                  string url)
         {
-            var responseHandlers = handlers.Where(handler => handler.CanHandle<TResult>(responseMessage)).ToImmutableList();
-            if (responseHandlers.IsEmpty())
+            var matchingResponseHandlers = responseHandlers.Where(handler => handler.CanHandle<TResult>(responseMessage)).ToImmutableList();
+            if (matchingResponseHandlers.IsEmpty())
             {
-                throw new ProblemDetailsException("No response handler was found to handle expected response", $"No response handler was found to handle expected response type: '{typeof(TResult).Name}'", ("Response type", typeof(TResult).Name));
+                throw new ProblemDetailsException("No response handler was found to handle expected response",
+                                                  $"No response handler was found to handle expected response type: '{typeof(TResult).Name}'",
+                                                  ("Response type", typeof(TResult).Name));
             }
 
-            if (responseHandlers.Count > 1)
+            if (matchingResponseHandlers.Count > 1)
             {
-                throw new ProblemDetailsException("More than one reponse handlers was found for expected response type", $"For response type: '{typeof(TResult).Name}' {responseHandlers.Count} response handler was found", ("Response type", typeof(TResult).Name), ("ResponseHandlers", responseHandlers.Select(handler => handler.GetType().Name).ToImmutableList()));
+                throw new ProblemDetailsException("More than one reponse handlers was found for expected response type",
+                                                  $"For response type: '{typeof(TResult).Name}' {matchingResponseHandlers.Count} response handler was found",
+                                                  ("Response type", typeof(TResult).Name),
+                                                  ("ResponseHandlers", matchingResponseHandlers.Select(handler => handler.GetType().Name).ToImmutableList()));
             }
 
-            var result = responseHandlers[0].HandleAsync<TResult>(responseMessage, httpMethod, httpClient, url);
+            var result = matchingResponseHandlers[0].HandleAsync<TResult>(responseMessage, httpMethod, httpClient, url);
             return result;
         }
     }
