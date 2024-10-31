@@ -1,1 +1,0 @@
-D:\\AzureDevOps\\AspNetCore.MinimalApi.Sdk\\AspNetCore.MinimalApi.Sdk.DotNetTool.Test\\bin\\Debug\\net8.0\\MyApi\\Config\\Get\\Output\\simpleJson.json
