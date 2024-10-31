@@ -10,13 +10,13 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
     /// <summary>
     /// Extension method to add the application starter to the service collection.
     /// </summary>
-    internal static class AddMyAppStarterExtension
+    internal static class AddCliRunnerExtension
     {
         /// <summary>
         /// Adds the CliRunner as a singleton service if it does not already exist.
         /// </summary>
         /// <param name="services">The service collection to which the CliRunner is added.</param>
-        internal static void AddMyAppStarter(this IServiceCollection services)
+        internal static void AddCliRunner(this IServiceCollection services)
         {
             services.AddSingletonIfNotExists<CliRunner>();
         }

@@ -35,7 +35,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
             serviceCollection.AddSingleton<IDotNetTool>(dotnetTool);
 
             // 4. Register the application starter extension.
-            serviceCollection.AddMyAppStarter();
+            serviceCollection.AddCliRunner();
 
             // 5. Build the service provider from the service collection.
             var serviceProvider = serviceCollection.BuildServiceProvider();

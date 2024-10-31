@@ -27,11 +27,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+      <ProjectReference Include="..\AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj" />
+        <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     </ItemGroup>
 
 </Project>
