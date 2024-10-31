@@ -4,6 +4,7 @@ using AspNetCore.Simple.MsTest.Sdk;
 using Microsoft.Extensions.DependencyInjection;
 using Extensions.Pack;
 using System.Text.RegularExpressions;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
 {
@@ -20,10 +21,10 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
 
     public partial class MyAppStarter
     {
-        internal async Task<CliRunResult> StartAsync(string[] consoleArguments)
+        internal async Task<CliRunResult> RunAsync(string[] consoleArguments)
         {
             var originalConsoleOut = Console.Out;
-            
+
             await using var sw = new StringWriter();
             var strings = consoleArguments;
             var consoleCall = strings.Flatten(" ");
@@ -31,17 +32,40 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
             Console.SetOut(sw);
             var exitCode = await Program.Main(strings).ConfigureAwait(false);
             var output = sw.ToString();
-            
+
             Console.SetOut(originalConsoleOut);
-            
-            return new CliRunResult(output, exitCode);
+
+            var trimLineBreaks = output.TrimStart('\r').TrimStart('\n').TrimEnd('\n').TrimEnd('\r');
+
+            return new CliRunResult(trimLineBreaks, exitCode);
         }
 
         internal Task<string> AssertRunAsync(string cliCall)
         {
             return AssertRunAsync(cliCall, string.Empty, string.Empty);
         }
-        
+
+        internal Task<T> AssertRunAsync<T>(string cliCall) where T : FileSystemInfo
+        {
+            return AssertRunAsync<T>(cliCall, string.Empty, string.Empty);
+        }
+
+        internal async Task<T> AssertRunAsync<T>(string cliCall,
+                                           string expectedOutput,
+                                           [CallerArgumentExpression(nameof(expectedOutput))] string expectedResultName = "") where T : FileSystemInfo
+        {
+            var result = await AssertRunAsync(cliCall, expectedOutput, expectedResultName);
+
+            var exists = Path.Exists(result);
+            if (exists)
+            {
+                var fileInfo = new FileInfo(result);
+                return fileInfo.Cast<T>();
+            }
+
+            throw new InvalidOperationException("The console output is not a file path. Please check the output or your call to fix or change it.");
+        }
+
         internal Task<string> AssertRunAsync(string cliCall,
                                              string expectedOutput,
                                              [CallerArgumentExpression(nameof(expectedOutput))] string expectedResultName = "")
@@ -61,8 +85,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
                                                    string expectedOutput,
                                                    [CallerArgumentExpression(nameof(expectedOutput))] string expectedResultName = "")
         {
-            var result = await StartAsync(consoleArguments);
-
+            var result = await RunAsync(consoleArguments);
+            var currentOutput = result.Output;
+            
             // check if embedded resources
             if (expectedOutput.EndsWith(".txt", StringComparison.OrdinalIgnoreCase) ||
                 expectedOutput.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
@@ -72,24 +97,31 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
 
 
             // Check if valid exit code
-            Assert.AreEqual(0, result.ExitCode, result.Output);
+            
+            Assert.AreEqual(0, result.ExitCode, currentOutput);
 
             // if no expected result value was passed no further checks are needed
             if (expectedOutput.IsNullOrWhiteSpace())
             {
-                return result.Output;
+                return currentOutput;
             }
 
-            if (result.Output.Contains('{', StringComparison.OrdinalIgnoreCase))
+            // Its like magic
+            if (Path.Exists(currentOutput))
             {
-                var current = JsonNode.Parse(result.Output);
+                currentOutput = await File.ReadAllTextAsync(currentOutput);
+            }
+            
+            if (currentOutput.Contains('{', StringComparison.OrdinalIgnoreCase))
+            {
+                var current = JsonNode.Parse(currentOutput);
                 var expected = JsonNode.Parse(expectedOutput);
 
                 Assert.That.ObjectsAreEqual(expected, current, expectedResultParameterName: expectedResultName);
             }
             else
             {
-                Assert.That.ObjectsAreEqual(expectedOutput, result.Output, expectedResultParameterName: expectedResultName);
+                Assert.That.ObjectsAreEqual(expectedOutput, currentOutput, expectedResultParameterName: expectedResultName);
             }
 
             return result.Output;

@@ -12,6 +12,7 @@
       <None Remove="MyApi\Config\Get\Output\GetAsJson.json" />
       <None Remove="MyApi\Config\Get\Output\GetAsJsonAsString.json" />
       <None Remove="MyApi\Config\Get\Output\GetAsJsonIndented.json" />
+      <None Remove="MyApi\Config\Get\Output\GetAsJsonIntoFile.txt" />
       <None Remove="MyApi\Config\Set\Output\GetConfig.json" />
       <None Remove="MyApi\Config\Set\Output\GetConfigAfterUpdate.json" />
       <None Remove="MyApi\Config\Set\Output\SetConfig.json" />
@@ -19,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJsonIntoFile.txt" />
       <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJsonIndented.json" />
       <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJsonAsString.json" />
       <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJson.json" />

@@ -1,4 +1,4 @@
-using Extensions.Pack;
+﻿using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
@@ -36,7 +36,6 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 
             await File.WriteAllTextAsync(fileInfo.FullName, value).ConfigureAwait(false);
 
-            consoleService.WriteSuccess("Output successfully written into file:");
             consoleService.WriteSuccess(fileInfo.FullName);
         }
     }
