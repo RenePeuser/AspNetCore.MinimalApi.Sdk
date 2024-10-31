@@ -1,4 +1,4 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
@@ -32,10 +32,10 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                                                   $"The response type handler for type: {typeof(TResult).Name} is not supported",
                                                   ("SupportedTypes", "Serializable content"));
             }
-
+            
             var content = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
             var result = content.FromJsonStringAs<TResult>();
-
+            
             return result;
         }
     }

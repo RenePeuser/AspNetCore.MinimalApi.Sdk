@@ -1,4 +1,4 @@
-﻿using System.CommandLine;
+using System.CommandLine;
 using Extensions.Pack;
 using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Config.Get;
 using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Config.Set;

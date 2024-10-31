@@ -1,4 +1,4 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
 {
@@ -17,16 +17,12 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.ToDo.V1.AddToDo
         {
             // 1. create client
             var httpCallHandler = myApiHttpClientFactory.CreateFrom(parameters.Token);
-
             // 2. Convert into target type
             var callInfos = parameters.Json.FromJsonStringAs<Dictionary<string, object?>>();
-
             // 3. Setup all needed variables
             var todo = callInfos["todo"]; // Mandatory
-
             // Get the response as string -> only OK responses are provided here, error will be handled as exception
             var stringResponse = await httpCallHandler.CallAsync(HttpMethod.Post, $"api/v1.0/todos", todo, CancellationToken.None).ConfigureAwait(false);
-
             // 3. Write the formatted string to the output
             await outputService.WriteAsync(stringResponse, parameters.Output, parameters.Format).ConfigureAwait(false);
         }

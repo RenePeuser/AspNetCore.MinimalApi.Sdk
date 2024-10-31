@@ -1,4 +1,4 @@
-﻿using System.CommandLine;
+using System.CommandLine;
 using System.CommandLine.Invocation;
 using Extensions.Pack;
 
@@ -6,9 +6,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Config.Get
 {
     internal static class AddGetCommandBuilderExtension
     {
-        internal static void AddGetCommandBuilder(this IServiceCollection services, IConfiguration _)
+        internal static void AddGetCommandBuilder(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddGetHandler();
+            services.AddGetHandler(configuration);
             services.AddGetOptionsBuilder();
             services.AddSingletonIfNotExists<IConfigSubCommandBuilder, GetCommandBuilder>();
         }

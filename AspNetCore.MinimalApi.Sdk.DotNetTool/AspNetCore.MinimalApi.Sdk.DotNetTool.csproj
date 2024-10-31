@@ -8,15 +8,14 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Extensions.Pack" Version="5.0.4" />
-    <PackageReference Include="GitVersion.MsBuild" Version="6.0.3">
+    <PackageReference Include="GitVersion.MsBuild" Version="6.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
-    <PackageReference Include="Siemens.AspNet.ErrorHandling.Contracts" Version="1.0.0" />
     <PackageReference Include="System.CommandLine" Version="0.3.0-alpha.20054.1" />
   </ItemGroup>
   <!--.NET tool specific settings-->

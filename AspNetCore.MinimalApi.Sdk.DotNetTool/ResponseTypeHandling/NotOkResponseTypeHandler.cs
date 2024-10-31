@@ -1,4 +1,4 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
@@ -29,7 +29,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                                                   $"The response type handler for type: {typeof(TResult).Name} is not supported",
                                                   ("SupportedTypes", "NotOk responses"));
             }
-
+            
             var content = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
             var absoluteUrl = $"{httpClient.BaseAddress}{url}";
             throw new ProblemDetailsException(responseMessage.StatusCode,

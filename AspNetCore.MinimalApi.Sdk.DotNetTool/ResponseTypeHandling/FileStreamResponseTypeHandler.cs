@@ -1,4 +1,4 @@
-﻿using System.Net.Mime;
+using System.Net.Mime;
 using Extensions.Pack;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +26,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                                                   $"The response type handler for type: {typeof(TResult).Name} is not supported",
                                                   ("SupportedTypes", "FileStreamResult"));
             }
-
+            
             var content = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
             var fileName = responseMessage.Content.Headers.ContentDisposition?.FileName ?? string.Empty;
             var fileStreamResult = new FileStreamResult(content, MediaTypeNames.Application.Octet) { FileDownloadName = fileName };

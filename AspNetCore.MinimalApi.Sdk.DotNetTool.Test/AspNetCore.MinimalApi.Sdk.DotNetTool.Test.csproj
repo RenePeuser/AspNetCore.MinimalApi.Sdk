@@ -8,39 +8,22 @@
         <IsTestProject>true</IsTestProject>
     </PropertyGroup>
 
+    <!--Embedded files area-->
     <ItemGroup>
-      <None Remove="MyApi\Config\Get\Output\GetAsJson.json" />
-      <None Remove="MyApi\Config\Get\Output\GetAsJsonAsString.json" />
-      <None Remove="MyApi\Config\Get\Output\GetAsJsonIndented.json" />
-      <None Remove="MyApi\Config\Get\Output\GetAsJsonIntoFile.txt" />
-      <None Remove="MyApi\Config\Set\Output\GetConfig.json" />
-      <None Remove="MyApi\Config\Set\Output\GetConfigAfterUpdate.json" />
-      <None Remove="MyApi\Config\Set\Output\SetConfig.json" />
-      <None Remove="MyApi\Config\Set\Parameters\OriginalAppSettings.json" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJsonIntoFile.txt" />
-      <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJsonIndented.json" />
-      <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJsonAsString.json" />
-      <EmbeddedResource Include="MyApi\Config\Get\Output\GetAsJson.json" />
-      <EmbeddedResource Include="MyApi\Config\Set\Output\SetConfig.json" />
-      <EmbeddedResource Include="MyApi\Config\Set\Output\GetConfigAfterUpdate.json" />
-      <EmbeddedResource Include="MyApi\Config\Set\Output\GetConfig.json" />
-      <EmbeddedResource Include="MyApi\Config\Set\Parameters\OriginalAppSettings.json" />
+        <EmbeddedResource Include="**\*.json" Exclude="bin\**\*;obj\**\*" />
+        <EmbeddedResource Include="**\*.txt" Exclude="bin\**\*;obj\**\*" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="AspNetCore.Simple.MsTest.Sdk" Version="4.0.10" />
         <PackageReference Include="coverlet.collector" Version="6.0.2">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="DotNetTool.Service" Version="0.3.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-        <PackageReference Include="MSTest.TestAdapter" Version="3.6.1" />
-        <PackageReference Include="MSTest.TestFramework" Version="3.6.1" />
-        <PackageReference Include="Extensions.Pack" Version="5.0.4" />
+        <PackageReference Include="MSTest.TestAdapter" Version="3.6.2" />
+        <PackageReference Include="MSTest.TestFramework" Version="3.6.2" />
     </ItemGroup>
 
     <ItemGroup>
@@ -48,7 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj" />
+        <ProjectReference Include="..\AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj" />
     </ItemGroup>
 
 </Project>

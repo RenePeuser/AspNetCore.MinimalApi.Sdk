@@ -1,4 +1,4 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
@@ -30,7 +30,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool
                                                   $"The response type handler for type: {typeof(TResult).Name} is not supported",
                                                   ("SupportedTypes", "byte[]"));
             }
-
+            
             var result = await responseMessage.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
             return (TResult)result.Cast<object>();
         }

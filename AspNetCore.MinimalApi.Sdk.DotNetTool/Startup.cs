@@ -1,10 +1,10 @@
-﻿using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi;
+using AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool
 {
     internal sealed class Startup
     {
-        internal void ConfigureServices(IServiceCollection services,
+        internal void ConfigureServices(IServiceCollection services, 
                                         IConfiguration configuration)
         {
             // 1. Infrastructure

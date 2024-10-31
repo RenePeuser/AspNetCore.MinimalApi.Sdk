@@ -17,14 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures", "AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures\AspNetCore.MinimalApi.Sdk.CodeRules.Fixtures.csproj", "{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.DotNetTool", "AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj", "{F380FFA0-8DD1-413E-86AD-273A7EDA6AF7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.MinimalApi.Sdk.DotNetTool.Test", "AspNetCore.MinimalApi.Sdk.DotNetTool.Test\AspNetCore.MinimalApi.Sdk.DotNetTool.Test.csproj", "{F0418206-D059-4D08-AB19-BC4DD78D701C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{372DF940-A7B0-468D-8F0B-A66EEE36B83D}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.MinimalApi.Sdk.DotNetTool", "AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj", "{12D9E353-C433-477A-BD10-A36C7ADD0079}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,14 +60,14 @@ Global
 		{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59BDB163-4A0D-4B1C-A698-286CCEDB3FF0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F380FFA0-8DD1-413E-86AD-273A7EDA6AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F380FFA0-8DD1-413E-86AD-273A7EDA6AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F380FFA0-8DD1-413E-86AD-273A7EDA6AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F380FFA0-8DD1-413E-86AD-273A7EDA6AF7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F0418206-D059-4D08-AB19-BC4DD78D701C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0418206-D059-4D08-AB19-BC4DD78D701C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0418206-D059-4D08-AB19-BC4DD78D701C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0418206-D059-4D08-AB19-BC4DD78D701C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D9E353-C433-477A-BD10-A36C7ADD0079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D9E353-C433-477A-BD10-A36C7ADD0079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D9E353-C433-477A-BD10-A36C7ADD0079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D9E353-C433-477A-BD10-A36C7ADD0079}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

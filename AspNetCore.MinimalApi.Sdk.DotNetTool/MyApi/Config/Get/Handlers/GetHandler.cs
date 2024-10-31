@@ -1,10 +1,10 @@
-﻿using Extensions.Pack;
+using Extensions.Pack;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.MyApi.Config.Get
 {
     internal static class AddGetHandlerExtension
     {
-        internal static void AddGetHandler(this IServiceCollection services)
+        internal static void AddGetHandler(this IServiceCollection services, IConfiguration _)
         {
             services.AddOutputService();
 

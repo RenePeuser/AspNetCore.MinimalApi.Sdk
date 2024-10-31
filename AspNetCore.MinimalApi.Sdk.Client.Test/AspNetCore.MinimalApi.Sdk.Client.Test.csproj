@@ -17,18 +17,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="Api\ToDos\V1\GetAll\Responses\GetAllToDosOkResponse.json"/>
+        <None Remove="Api\ToDos\V1\GetAll\Responses\GetAllToDosOkResponse.json" />
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Api\ToDos\V1\GetAll\Responses\GetAllToDosOkResponse.json"/>
+        <EmbeddedResource Include="Api\ToDos\V1\GetAll\Responses\GetAllToDosOkResponse.json" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AspNetCore.Simple.MsTest.Sdk" Version="3.0.2"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0"/>
-        <PackageReference Include="MSTest.TestAdapter" Version="3.4.0"/>
-        <PackageReference Include="MSTest.TestFramework" Version="3.4.0"/>
+        <PackageReference Include="AspNetCore.Simple.MsTest.Sdk" Version="4.0.10" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+        <PackageReference Include="MSTest.TestAdapter" Version="3.6.2" />
+        <PackageReference Include="MSTest.TestFramework" Version="3.6.2" />
         <PackageReference Include="coverlet.collector" Version="6.0.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -42,13 +42,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\src\MinimalApi\MinimalApi.csproj"/>
-        <ProjectReference Include="..\AspNetCore.MinimalApi.Sdk.Client\AspNetCore.MinimalApi.Sdk.Client.csproj"/>
+        <ProjectReference Include="..\src\MinimalApi\MinimalApi.csproj" />
+        <ProjectReference Include="..\AspNetCore.MinimalApi.Sdk.Client\AspNetCore.MinimalApi.Sdk.Client.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Api\ToDos\V1\GetById\"/>
-        <Folder Include="Api\ToDos\V2\NewFolder\"/>
+        <Folder Include="Api\ToDos\V1\GetById\" />
+        <Folder Include="Api\ToDos\V2\NewFolder\" />
     </ItemGroup>
 
 </Project>
