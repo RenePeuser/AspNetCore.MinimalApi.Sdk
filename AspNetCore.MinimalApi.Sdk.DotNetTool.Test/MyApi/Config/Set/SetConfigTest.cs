@@ -3,7 +3,8 @@
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test.MyApi.Config.Get
 {
     [TestClass]
-    [TestCategory("myapi config set ")]
+    [TestCategory("myapi")]
+    [TestCategory("myapi config set")]
     public class SetConfigTest : GlobalSetup
     {
         [TestInitialize]
