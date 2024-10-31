@@ -1,8 +1,4 @@
-﻿using System.Text.Json.Nodes;
-using AspNetCore.Simple.MsTest.Sdk;
-using Extensions.Pack;
-
-namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test.MyApi.Config.Get
+﻿namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test.MyApi.Config.Get
 {
     [TestClass]
     [TestCategory("myapi config get")]
@@ -45,25 +41,4 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test.MyApi.Config.Get
                                                $"MyApi.Config.Get.Output.GetAs{format}.json").ConfigureAwait(false);
         }
     }
-
-    //internal sealed record GetConfig() : IRequest;
-
-    //internal sealed class LocalizeAllStringsHandler(MyAppStarter myAppStarter) : IRequestHandler<GetConfig>
-    //{
-    //    public Task Handle(GetConfig request,
-    //                       CancellationToken cancellationToken)
-    //    {
-    //        var consoleArguments = CollectConsoleParameters(request).ToArray();
-
-    //        return myAppStarter.StartAsync(consoleArguments, cancellationToken);
-    //    }
-
-    //    private IEnumerable<string> CollectConsoleParameters(GetConfig parameters)
-    //    {
-    //        // 1. Parameter solution file from the backend to parse
-    //        yield return "myapi";
-    //        yield return "config";
-    //        yield return "get";
-    //    }
-    //}
 }
