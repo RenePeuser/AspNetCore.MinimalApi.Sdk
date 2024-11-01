@@ -328,7 +328,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
             // Early exit
             if (embeddedFile.Split(".").Length > 3)
             {
-                lastMatches = lastMatches.Where(value => value.Contains(embeddedFile)).ToList();
+                lastMatches = lastMatches.Where(value => value.Contains(embeddedFile, StringComparison.OrdinalIgnoreCase)).ToList();
             }
             
             foreach (var consoleArgument in consoleArguments)
