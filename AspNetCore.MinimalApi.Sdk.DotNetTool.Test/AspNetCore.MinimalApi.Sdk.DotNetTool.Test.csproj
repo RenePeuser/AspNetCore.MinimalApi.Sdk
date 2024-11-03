@@ -1,31 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <IsPackable>false</IsPackable>
-        <IsTestProject>true</IsTestProject>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageReference Include="AspNetCore.Simple.MsTest.Sdk" Version="4.0.10" />
-        <PackageReference Include="coverlet.collector" Version="6.0.2">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-        <PackageReference Include="DotNetTool.Service" Version="0.3.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-        <PackageReference Include="MSTest.TestAdapter" Version="3.6.2" />
-        <PackageReference Include="MSTest.TestFramework" Version="3.6.2" />
-    </ItemGroup>
-    <ItemGroup>
-        <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj" />
-    </ItemGroup>
-    <!--Embedded files area-->
-    <ItemGroup>
-        <EmbeddedResource Include="**\*.json" Exclude="bin\**\*;obj\**\*" />
-    </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.Simple.MsTest.Sdk" Version="4.0.10" />
+    <PackageReference Include="coverlet.collector" Version="6.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="DotNetTool.Service" Version="0.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.6.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.6.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AspNetCore.MinimalApi.Sdk.DotNetTool\AspNetCore.MinimalApi.Sdk.DotNetTool.csproj" />
+  </ItemGroup>
+  <!--Embedded files area-->
+  <ItemGroup>
+    <EmbeddedResource Include="**\*.json" Exclude="bin\**\*;obj\**\*" />
+  </ItemGroup>
+  <!--.NET tool specific settings-->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
 </Project>

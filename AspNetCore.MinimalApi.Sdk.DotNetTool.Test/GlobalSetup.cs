@@ -1,4 +1,4 @@
-﻿using DotNetTool.Service;
+using DotNetTool.Service;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
@@ -25,15 +25,11 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
         {
             // 1. Create an instance of the DotNetTool.
             var dotnetTool = DotNetToolFactory.Create();
-            
             // 2. Create a new service collection for dependency injection.
             var serviceCollection = new ServiceCollection();
-            
             // 3. Register the test context and DotNetTool as singletons.
             serviceCollection.AddSingleton(testContext);
             serviceCollection.AddSingleton<IDotNetTool>(dotnetTool);
-            serviceCollection.AddConsoleArgumentsResolver();
-            
             // 4. Register the application starter extension.
             serviceCollection.AddCliRunner();
             // 5. Build the service provider from the service collection.

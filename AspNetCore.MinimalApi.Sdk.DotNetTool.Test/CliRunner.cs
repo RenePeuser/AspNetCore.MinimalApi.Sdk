@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Nodes;
 using AspNetCore.Simple.MsTest.Sdk;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,9 +25,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
     /// <summary>
     /// Represents the result of a CLI run, including the output and exit code.
     /// </summary>
-    internal sealed record CliRunResult(string Output,
-                                        int ExitCode);
-
+    internal sealed record CliRunResult(string Output, int ExitCode);
     /// <summary>
     /// Class responsible for running CLI commands and capturing their output.
     /// </summary>
@@ -42,31 +40,23 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
         {
             // 1. Remember the original console output.
             var originalConsoleOut = Console.Out;
-
             // 2. Create a string writer to intercept all console outs
             await using var sw = new StringWriter();
-
             // 3. Print out the original console call
             //    Important before we switch the console out
             //    because we won't that output in the response
             var consoleCall = consoleArguments.Flatten(" ");
             Console.WriteLine(consoleCall);
-
             // 4. Set the new output to the string writer
             Console.SetOut(sw);
-
             // 5. Run the CLI command and get the exit code
             var exitCode = await Program.Main(consoleArguments).ConfigureAwait(false);
-
             // 6. Get the output from the string writer
             var output = sw.ToString();
-
             // 7. Reset the console output
             Console.SetOut(originalConsoleOut);
-
             // 8. Trim the line breaks from the output
             var trimLineBreaks = output.TrimStart('\r').TrimStart('\n').TrimEnd('\n').TrimEnd('\r');
-
             // 9. Return the result
             return new CliRunResult(trimLineBreaks, exitCode);
         }
@@ -77,23 +67,15 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
     /// </summary>
     public static partial class CliRunnerExtensions
     {
-        private static readonly ConsoleArgumentsResolver ConsoleArgumentsResolver = new ConsoleArgumentsResolver(new EmbeddedFileLocator());
-        private static readonly EmbeddedFileLocator EmbeddedFileLocator = new EmbeddedFileLocator();
-
         [GeneratedRegex(@"(\S+)\s+(\S+)\s+(\S+)\s+({.*})")]
         private static partial Regex ConsoleArgsSplitterRegex();
-        
-        [GeneratedRegex(@"\.[a-zA-Z0-9]{3,4}$")]
-        private static partial Regex IsFileExtensionRegex();        
-
         /// <summary>
         /// Runs the specified CLI command and asserts the output.
         /// </summary>
         /// <param name = "starter">The CliRunner instance.</param>
         /// <param name = "cliCall">The CLI command to run.</param>
         /// <returns>A task representing the asynchronous operation, with the output as the result.</returns>
-        public static Task<string> AssertRunAsync(this CliRunner starter,
-                                                  string cliCall)
+        public static Task<string> AssertRunAsync(this CliRunner starter, string cliCall)
         {
             return starter.AssertRunAsync(cliCall, string.Empty, string.Empty);
         }
@@ -105,8 +87,7 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
         /// <param name = "starter">The CliRunner instance.</param>
         /// <param name = "cliCall">The CLI command to run.</param>
         /// <returns>A task representing the asynchronous operation, with a FileSystemInfo object as the result.</returns>
-        public static Task<T> AssertRunAsync<T>(this CliRunner starter,
-                                                string cliCall)
+        public static Task<T> AssertRunAsync<T>(this CliRunner starter, string cliCall)
             where T : FileSystemInfo
         {
             return starter.AssertRunAsync<T>(cliCall, string.Empty, string.Empty);
@@ -121,20 +102,14 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
         /// <param name = "expectedOutput">The expected output of the CLI command.</param>
         /// <param name = "expectedResultName">The name of the expected result parameter.</param>
         /// <returns>A task representing the asynchronous operation, with a FileSystemInfo object as the result.</returns>
-        public static async Task<T> AssertRunAsync<T>(this CliRunner starter,
-                                                      string cliCall,
-                                                      string expectedOutput,
-                                                      [CallerArgumentExpression(nameof(expectedOutput))]
-                                                      string expectedResultName = "")
+        public static async Task<T> AssertRunAsync<T>(this CliRunner starter, string cliCall, string expectedOutput, [CallerArgumentExpression(nameof(expectedOutput))] string expectedResultName = "")
             where T : FileSystemInfo
         {
             var result = await starter.AssertRunAsync(cliCall, expectedOutput, expectedResultName);
             var exists = Path.Exists(result);
-
             if (exists)
             {
                 var fileInfo = new FileInfo(result);
-
                 return fileInfo.Cast<T>();
             }
 
@@ -149,14 +124,9 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
         /// <param name = "expectedOutput">The expected output of the CLI command.</param>
         /// <param name = "expectedResultName">The name of the expected result parameter.</param>
         /// <returns>A task representing the asynchronous operation, with the output as the result.</returns>
-        public static Task<string> AssertRunAsync(this CliRunner starter,
-                                                  string cliCall,
-                                                  string expectedOutput,
-                                                  [CallerArgumentExpression(nameof(expectedOutput))]
-                                                  string expectedResultName = "")
+        public static Task<string> AssertRunAsync(this CliRunner starter, string cliCall, string expectedOutput, [CallerArgumentExpression(nameof(expectedOutput))] string expectedResultName = "")
         {
             var parameters = cliCall.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
             if (cliCall.Contains('{', StringComparison.OrdinalIgnoreCase))
             {
                 var match = ConsoleArgsSplitterRegex().Match(cliCall);
@@ -174,29 +144,18 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
         /// <param name = "expectedOutput">The expected output of the CLI command.</param>
         /// <param name = "expectedResultName">The name of the expected result parameter.</param>
         /// <returns>A task representing the asynchronous operation, with the output as the result.</returns>
-        public static async Task<string> AssertRunAsync(this CliRunner starter,
-                                                        string[] consoleArguments,
-                                                        string expectedOutput,
-                                                        [CallerArgumentExpression(nameof(expectedOutput))]
-                                                        string expectedResultName = "")
+        public static async Task<string> AssertRunAsync(this CliRunner starter, string[] consoleArguments, string expectedOutput, [CallerArgumentExpression(nameof(expectedOutput))] string expectedResultName = "")
         {
-            var resolvedArguments = await ConsoleArgumentsResolver.Normalize(consoleArguments).ConfigureAwait(false);
-
-            var result = await starter.RunAsync(resolvedArguments);
-
+            var result = await starter.RunAsync(consoleArguments);
             var currentOutput = result.Output;
-
             // Check if embedded resources
-            if (IsFileExtensionRegex().IsMatch(expectedOutput))
+            if (expectedOutput.EndsWith(".txt", StringComparison.OrdinalIgnoreCase) || expectedOutput.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
             {
-                var locationResult = await EmbeddedFileLocator.LocateFromOutputAsync(consoleArguments, expectedOutput).ConfigureAwait(false);
-                expectedResultName = locationResult.Name;
-                expectedOutput = locationResult.FileContent;
+                expectedOutput = EmbeddedFile.GetFileContentFrom(expectedOutput);
             }
 
             // Check if valid exit code
             Assert.AreEqual(0, result.ExitCode, currentOutput);
-
             // If no expected result value was passed, no further checks are needed
             if (expectedOutput.IsNullOrWhiteSpace())
             {
@@ -222,145 +181,6 @@ namespace AspNetCore.MinimalApi.Sdk.DotNetTool.Test
             }
 
             return result.Output;
-        }
-    }
-
-    public static class AddConsoleArgumentsResolverExtension
-    {
-        public static void AddConsoleArgumentsResolver(this IServiceCollection services)
-        {
-            services.AddEmbeddedFileLocator();
-            
-            services.AddSingletonIfNotExists<ConsoleArgumentsResolver>();
-        }
-    }
-
-    internal sealed partial class ConsoleArgumentsResolver(EmbeddedFileLocator embeddedFileLocator)
-    {
-        private readonly Regex _fileExtensionRegex = IsFileExtensionRegex();
-
-        internal async Task<string[]> Normalize(string[] consoleArguments)
-        {
-            var copyOfArgs = consoleArguments.ToArray();
-            var commandPath = string.Empty;
-
-            for (int i = 0; i < copyOfArgs.Length; i++)
-            {
-                var parameter = copyOfArgs[i];
-
-                if (parameter.IsNullOrWhiteSpace())
-                {
-                    continue;
-                }
-                
-                if (_fileExtensionRegex.IsMatch(parameter))
-                {
-                    commandPath = i < 1 ? parameter : $"{commandPath}.Parameters.{parameter}";
-                    
-                    var jsonFile = parameter.Split(".").Length > 3 ? parameter : commandPath;
-                    var result = await embeddedFileLocator.LocateAsync(consoleArguments, jsonFile).ConfigureAwait(false);
-                    copyOfArgs[i] = result.FileContent;
-                    
-                }
-                else
-                {
-                    commandPath = i < 1 ? parameter : $"{commandPath}.{parameter}";
-                }
-            }
-
-            return copyOfArgs;
-        }
-
-        [GeneratedRegex(@"\.[a-zA-Z0-9]{3,4}$")]
-        private static partial Regex IsFileExtensionRegex();
-    }
-
-    public class EmbededResuorceNotFoundException : Exception
-    {
-        internal EmbededResuorceNotFoundException(string message)
-            : base(message)
-        {
-        }
-    }
-
-    internal static class AddEmbeddedFileLocatorExtension
-    {
-        internal static void AddEmbeddedFileLocator(this IServiceCollection services)
-        {
-            services.AddSingletonIfNotExists<EmbeddedFileLocator>();
-        }
-    }
-    
-    internal sealed class EmbeddedFileLocator
-    {
-        internal Task<InMemoryFileAsString> LocateFromOutputAsync(string[] consoleArguments,
-                                                             string embeddedFile)
-        {
-            return LocateAsync(consoleArguments, embeddedFile, "Output");
-        }
-
-        internal Task<InMemoryFileAsString> LocateFromParametersAsync(string[] consoleArguments,
-                                                                 string embeddedFile)
-        {
-            return LocateAsync(consoleArguments, embeddedFile, "Parameters");
-        }
-
-        internal Task<InMemoryFileAsString> LocateAsync(string[] consoleArguments,
-                                                   string embeddedFile)
-        {
-            return LocateAsync(consoleArguments, embeddedFile, string.Empty);
-        }
-        
-        internal async Task<InMemoryFileAsString> LocateAsync(string[] consoleArguments,
-                                     string embeddedFile,
-                                     string specificFolder)
-        {
-            // myapi config get 
-            // myapi config set appsettings.json
-            // myapi todo v1 addtodo mytodo.json
-            // myapi todo v2 addtodo mytodo.json
-            var embeddedFiles = typeof(ConsoleArgumentsResolver).Assembly.GetManifestResourceNames();
-            embeddedFiles = specificFolder.IsNotNullOrWhiteSpace() ? embeddedFiles.Where(file => file.Contains($".{specificFolder}.")).ToArray() : embeddedFiles;
-
-            // We try to find from front to back :)
-            var lastMatches = embeddedFiles.ToList();
-            
-            // Early exit
-            if (embeddedFile.Split(".").Length > 3)
-            {
-                lastMatches = lastMatches.Where(value => value.Contains(embeddedFile, StringComparison.OrdinalIgnoreCase)).ToList();
-            }
-            
-            foreach (var consoleArgument in consoleArguments)
-            {
-                var currentMatch = lastMatches.Where(file => file.Contains($"{consoleArgument}.",StringComparison.OrdinalIgnoreCase)).ToList();
-
-                if (currentMatch.Count == 1)
-                {
-                    var result = await typeof(EmbeddedFileLocator).Assembly.GetEmbeddedFileAsStringAsync(currentMatch[0]).ConfigureAwait(false);
-                    return result;
-                }
-                
-                if (currentMatch.IsEmpty())
-                {
-                    if (lastMatches.IsEmpty())
-                    {
-                        throw new EmbededResuorceNotFoundException($"Cant find an embedded resource for: {embeddedFile}");
-                    }
-
-                    if (lastMatches.Count > 1)
-                    {
-                        throw new EmbededResuorceNotFoundException($"Cant find an unique embedded resource for: {embeddedFile}. We found:{Environment.NewLine}{lastMatches.Flatten(Environment.NewLine)}");
-                    }
-
-                    var result = await typeof(EmbeddedFileLocator).Assembly.GetEmbeddedFileAsStringAsync(currentMatch[0]).ConfigureAwait(false);
-                    return result;
-                }
-
-                lastMatches = currentMatch;
-            }
-
-            return new InMemoryFileAsString(embeddedFile, "json string");
         }
     }
 }
